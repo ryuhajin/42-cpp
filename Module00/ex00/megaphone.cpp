@@ -12,7 +12,7 @@ int main(int argc, char * argv[])
         {
             std::string new_string(argv[i], std::strlen(argv[i]));
             
-            for(int j = 0; j < new_string.size(); j++)
+            for(unsigned long j = 0; j < new_string.size(); j++)
             {
                 new_string[j] = std::toupper(new_string[j]);
             }
