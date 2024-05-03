@@ -1,12 +1,16 @@
 # include "Phonebook.h"
 
-/*
-<iomanip>
-setw
-https://blockdmask.tistory.com/477
-*/
+//#include <sstream> - https://tech-interview.tistory.com/199
+//cin.good()
 
-int main(int argc, char *argv[])
+int main(void)
 {
+	PhoneBook p;
+
+	while (true)
+	{
+		
+	}
+
 	return (0);
 }
