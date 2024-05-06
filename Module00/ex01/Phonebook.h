@@ -14,7 +14,7 @@ private:
 	int	recent_add_idx;
 	int total_add_count;
 public:
-	PhoneBook(/* args */);
+	PhoneBook();
 	~PhoneBook();
 	void	PhoneBook::print_phonebook();
 	void	PhoneBook::default_pb_head(void);
