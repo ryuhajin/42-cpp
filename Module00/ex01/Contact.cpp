@@ -1,9 +1,12 @@
 #ifndef	CONTACT_H
 #define	CONTACT_H
 
-# include <limits>
-# include <cctype>
-# include "Contact.h"
+# include "Phonebook.h"
+
+void print_str(const std::string &str)
+{
+	std::cout << str << std::endl;
+}
 
 std::string& Contact::get_first_name(void)
 {
@@ -30,11 +33,32 @@ std::string& Contact::get_secret(void)
 	return (this->secret);
 }
 
+void set_first_name(const std::string& input)
+{
+	first_name = input;
+}
+void set_last_name(const std::string& input)
+{
+	last_name = input;
+}
+void set_nickname(const std::string& input)
+{
+	nickname = input;
+}
+void set_phone_number(const std::string& input)
+{
+	phone_number = input;
+}
+void set_secret(const std::string& input)
+{
+	secret = input;
+}
+
 std::string& Contact::input_check (std::string &input)
 {
 	while (!std::getline(std::cin, input))
 	{
-		std::cout << "Input error. Please enter again." << std::endl;
+		print_str("Input error. Please enter again.");
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
@@ -47,36 +71,38 @@ bool Contact::digit_check (std::string &input)
 	for(std::string::iterator i = input.begin(); i != input.end(); ++i)
 	{
 		if (!std::isdigit(*i))
+		{
+			print_str("Input error. Please enter again.");
 			return false;
+		}
 	}
 	return true;
 }
 
-std::string& Contact::phonenumber_check (std::string &input)
+void Contact::add_contact(Contact::Contact& contact)
 {
-	while (!std::getline(std::cin, input) && !digit_check(input))
-	{
-		std::cout << "Input error. Please enter again." << std::endl;
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	}
-	return input;
-}
+	print_str("Please enter a first name.");
+	std::string fn;
+	set_first_name(input_check(fn));
 
-Contact::Contact& Contact::add_contact(void)
-{
-	std::string str;
-	std::cout << "Please enter a first name." << std::endl;
-	Contact.get_first_name().input_check(str);
+	print_str("Please enter a last name.");
+	std::string ln;
+	set_last_name(input_check(ln));
 
-	std::cout << "Please enter a last name." << std::endl;
-	Contact.get_last_name().input_check(str);
+	print_str("Please enter a nickname.");
+	std::string nn;
+	set_nickname(input_check(nn));
 
-	std::cout << "Please enter a nickname." << std::endl;
-	Contact.get_nickname().input_check(str);
+	print_str("Please enter a phone number. (digit only)");
+	std::string pn;
+	input_check(pn);
+	while (!digit_check(pn))
+		input_check(pn);
+	set_phonenumber(pn);
 
-	std::cout << "Please enter a phone number. (digit only)" << std::endl; //숫자만인지 체크
-
+	print_str("Please enter a secret.");
+	std::string sr;
+	set_secret(input_check(sr));
 }
 
 #endif

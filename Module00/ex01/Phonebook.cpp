@@ -1,11 +1,32 @@
 #include "Phonebook.h"
 
+void	PhoneBook::print_command ()
+{
+	std::cout << "Hello. Enter the command of your choice." << std::endl;
+	std::cout << "1. ADD" << std::endl;
+	std::cout << "2. SEARCH" << std::endl;
+	std::cout << "3. EXIT" << std::endl;
+}
+
+bool	PhoneBook::command_check (const std::string &input)
+{
+	static std::string add = "ADD";
+	static std::string search = "SEARCH";
+	static std::string exit = "EXIT";
+
+	if (input[0] == 'A')
+		return (input.compare(add));
+	else if (input[0] == 'S')
+		return	(input.compare(search));
+	return	(input.compare(exit));
+}
+
 void	PhoneBook::print_phonebook ()
 {
 	int i;
 	int j;
 
-	if (this->total_add_count < 9)
+	if (total_add_count < 8)
 		i = total_add_count;
 	else
 		i = 8;
@@ -15,6 +36,7 @@ void	PhoneBook::print_phonebook ()
 	while (j < i)
 	{
 		pb_line(this->phonebook[j], j);
+		j++;
 	}
 	while (j < 8)
 	{
@@ -40,7 +62,6 @@ void	PhoneBook::default_pb_line(int i)
 			<< std::setw(10) << std::right <<  '|' << std::endl;
 }
 
-// 길이 10으로 정규화 시켜서 출력해주는 함수 : print_reg_10len
 void	PhoneBook::lenth_check_print(std::string &string)
 {
 	static const int max_len = 10;
@@ -59,4 +80,48 @@ void	PhoneBook::pb_line (Contact &contact, int i)
 	lenth_check_print(contact.get_last_name());
 	lenth_check_print(contact.get_nickname());
 	std::cout << std::endl;
+}
+
+void	PhoneBook::set_phonebook(void)
+{
+	if (total_add_count < 8)
+	{
+		recent_add_idx = total_add_count;
+		Contact::add_contact(phonebook[recent_add_idx]);
+		total_add_count++;
+	}
+	else
+	{
+		if(recent_add_idx == 7)
+			recent_add_idx = 0;
+		Contact::add_contact(PhoneBook[recent_add_idx]);
+		recent_add_idx++;
+		total_add_count++;
+	}
+}
+
+bool	PhoneBook::select_command (const std::string &input)
+{
+	if (command_check(input) == -1)
+	{
+		std::cout << "Command error. Please enter again" << std::endl;
+		return (false);
+	}
+	else if (input[0] == 'A')
+	{
+		set_phonebook();
+		return (true);
+	}
+	else if(input[0] == 'S')
+	{
+		print_phonebook();
+		Contact::print_str("Please enter the index you want to see.");
+		//인덱스 번호 받기
+		//한줄씩 정보 출력하기
+	}
+	else
+	{
+		std::cout << " Exit the phonebook." << std::endl;
+		exit(0);
+	}
 }

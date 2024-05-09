@@ -9,9 +9,11 @@ int main(void)
 
 	while (true)
 	{
-		/*
-		뭐 할거니?
-		1. ADD (새 연락처 저장)
+		p.print_command();
+		std::string input;
+		if (p.select_command(Contact::input_check()) == false)
+			continue;
+		/*1. ADD (새 연락처 저장)
 			1. 성이 뭐니
 			2. 이름이 뭐니
 			3. 별명이 뭐니
