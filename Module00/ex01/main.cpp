@@ -1,7 +1,5 @@
 # include "Phonebook.h"
-
-//#include <sstream> - https://tech-interview.tistory.com/199
-//cin.good()
+#include <string>
 
 int main(void)
 {
@@ -11,8 +9,15 @@ int main(void)
 	{
 		p.print_command();
 		std::string input;
-		if (p.select_command(Contact::input_check()) == false)
-			continue;
+		// if (p.command_check(input_check(input)) == -1)
+		// 	continue;
+		// else
+		// 	p.select_command(input);
+	}
+
+	return (0);
+}
+
 		/*1. ADD (새 연락처 저장)
 			1. 성이 뭐니
 			2. 이름이 뭐니
@@ -28,7 +33,3 @@ int main(void)
 			종료.
 		-> 다른 명령은 버려짐.
 		*/
-	}
-
-	return (0);
-}

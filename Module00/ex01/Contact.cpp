@@ -3,11 +3,6 @@
 
 # include "Phonebook.h"
 
-void print_str(const std::string &str)
-{
-	std::cout << str << std::endl;
-}
-
 std::string& Contact::get_first_name(void)
 {
 	return (this->first_name);
@@ -54,7 +49,12 @@ void set_secret(const std::string& input)
 	secret = input;
 }
 
-std::string& Contact::input_check (std::string &input)
+void print_str(const std::string &str)
+{
+	std::cout << str << std::endl;
+}
+
+std::string& input_check (std::string &input)
 {
 	while (!std::getline(std::cin, input))
 	{
@@ -66,7 +66,7 @@ std::string& Contact::input_check (std::string &input)
 	return input;
 }
 
-bool Contact::digit_check (std::string &input)
+bool digit_check (std::string &input)
 {
 	for(std::string::iterator i = input.begin(); i != input.end(); ++i)
 	{
@@ -79,7 +79,14 @@ bool Contact::digit_check (std::string &input)
 	return true;
 }
 
-void Contact::add_contact(Contact::Contact& contact)
+void	str_to_number(std::string &input)
+{
+	Contact::input_check(index);
+	while (!(Contact::digit_check(index)))
+		Contact::input_check(index);
+}
+
+void Contact::add_contact()
 {
 	print_str("Please enter a first name.");
 	std::string fn;
@@ -95,9 +102,7 @@ void Contact::add_contact(Contact::Contact& contact)
 
 	print_str("Please enter a phone number. (digit only)");
 	std::string pn;
-	input_check(pn);
-	while (!digit_check(pn))
-		input_check(pn);
+	str_to_number(pn);
 	set_phonenumber(pn);
 
 	print_str("Please enter a secret.");
