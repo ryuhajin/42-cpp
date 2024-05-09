@@ -1,22 +1,5 @@
-# include "Phonebook.h"
+#include "Phonebook.h"
 #include <string>
-
-int main(void)
-{
-	PhoneBook p;
-
-	while (true)
-	{
-		p.print_command();
-		std::string input;
-		// if (p.command_check(input_check(input)) == -1)
-		// 	continue;
-		// else
-		// 	p.select_command(input);
-	}
-
-	return (0);
-}
 
 		/*1. ADD (새 연락처 저장)
 			1. 성이 뭐니
@@ -33,3 +16,20 @@ int main(void)
 			종료.
 		-> 다른 명령은 버려짐.
 		*/
+
+int main(void)
+{
+	PhoneBook p;
+
+	while (true)
+	{
+		p.print_command();
+		std::string input;
+		p.input_check(input);
+		if (p.command_check(input) == false)
+			continue;
+		else
+			p.select_command(input);
+	}
+	return (0);
+}

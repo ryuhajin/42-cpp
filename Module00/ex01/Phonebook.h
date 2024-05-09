@@ -1,9 +1,8 @@
-#ifndef	PHONEBOOK_H
+# ifndef	PHONEBOOK_H
 #define	PHONEBOOK_H
 
 #include "Contact.h"
 #include <string>
-
 
 class PhoneBook
 {
@@ -13,31 +12,28 @@ private:
 	int	recent_add_idx;
 	int total_add_count;
 public:
-	PhoneBook();
-	~PhoneBook();
+	PhoneBook()
+	{
+		this->recent_add_idx = 0;
+		this->total_add_count = 0;
+	}
 
-	void	PhoneBook::print_command (void);
-	int		PhoneBook::command_check (const std::string &input);
-	void	PhoneBook::print_phonebook(void);
-	void	PhoneBook::default_pb_head(void);
-	void	PhoneBook::default_pb_line(int i);
-	void	PhoneBook::lenth_check_print(std::string &string);
-	void	PhoneBook::pb_line (Contact &contact, int idx);
-	void	PhoneBook::print_phonebook(void);
-	void	PhoneBook::set_phonebook(void);
-	void	PhoneBook::print_info(int i);
-	bool	PhoneBook::print_contact (void);
-	bool	PhoneBook::select_command (const std::string &input);
+	std::string&	input_check(std::string &input);
+	bool	digit_check(std::string &input);
+	void	str_number_check(std::string &index);
+	void	print_command(void);
+	int		command_check (const std::string &input);
+	void	default_pb_head(void);
+	void	default_pb_line(int idx);
+	void	lenth_check_print(std::string &string);
+	void	pb_line (Contact &contact, int idx);
+	void	print_phonebook(void);
+	void	add_contact(Contact &contact);
+	void	set_phonebook(void);
+	void	print_info(int idx);
+	bool	print_contact(void);
+	bool	select_command (const std::string &input);
+
 };
-
-PhoneBook::PhoneBook()
-{
-	this->recent_add_idx = 0;
-	this->total_add_count = 0;
-}
-
-PhoneBook::~PhoneBook()
-{
-}
 
 #endif
