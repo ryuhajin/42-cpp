@@ -1,5 +1,6 @@
 # include <iostream>
 # include <string>
+# include <cstring>
 # include <cctype>
 
 int main(int argc, char * argv[])
