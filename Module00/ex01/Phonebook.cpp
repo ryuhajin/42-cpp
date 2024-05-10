@@ -2,17 +2,43 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <cstdio>
+
+PhoneBook::PhoneBook()
+	: recent_add_idx(0)
+	, total_add_count(0)
+{}
+
+PhoneBook::~PhoneBook()
+{}
 
 std::string&	PhoneBook::input_check(std::string &input)
 {
-	while (!std::getline(std::cin, input))
+
+	while (true)
 	{
-		std::cout << "Input error. Please enter again." << std::endl;
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		if (!std::getline(std::cin, input))
+		{
+			if (std::cin.eof())
+			{
+				std::cout << "-> EOF(End Of File). Exit the phonebook.\n" << std::endl;
+				std::cin.clear();
+				clearerr(stdin);
+				exit(0);
+			}
+			else
+			{
+				std::cout << "-> Input error. Please enter again.\n" << std::endl;
+				std::cin.clear();
+				clearerr(stdin);
+				continue;
+			}
+		}
+		else
+			break;
 	}
 
-	return input;
+	return (input);
 }
 
 bool	PhoneBook::digit_check(std::string &input)
@@ -21,7 +47,7 @@ bool	PhoneBook::digit_check(std::string &input)
 	{
 		if (!std::isdigit(*i))
 		{
-			std::cout << "Input error. Please enter again." << std::endl;
+			std::cout << "-> Input error. Please enter again.\n" << std::endl;
 			return (false);
 		}
 	}
@@ -38,12 +64,12 @@ void	PhoneBook::str_number_check(std::string &index)
 void	PhoneBook::print_command(void)
 {
 	std::cout << "=== Hello. Enter the command of your choice. ===" << std::endl;
-	std::cout << "1. ADD" << std::endl;
-	std::cout << "2. SEARCH" << std::endl;
-	std::cout << "3. EXIT" << std::endl;
+	std::cout << "# ADD" << std::endl;
+	std::cout << "# SEARCH" << std::endl;
+	std::cout << "# EXIT" << std::endl;
 }
 
-int		PhoneBook::command_check (const std::string &input)
+int		PhoneBook::command_check(const std::string &input)
 {
 	static const std::string add = "ADD";
 	static const std::string search = "SEARCH";
@@ -54,35 +80,39 @@ int		PhoneBook::command_check (const std::string &input)
 
 void	PhoneBook::default_pb_head(void)
 {
-	std::cout << '|';
-	std::cout << std::setw(10) << std::right <<  "index" << '|'
-		<< std::setw(10) << std::right << "first name" << '|'
-		<< std::setw(10) << std::right << "last name" << '|'
-		<< std::setw(10) << std::right << "nickname" << '|' << std::endl;
+	std::cout << "|";
+	std::cout << std::setw(10) <<  "index" << "|";
+	std::cout << std::setw(10) << "first name" << "|";
+	std::cout << std::setw(10) << "last name" << "|";
+	std::cout << std::setw(10) << "nickname" << "|";
+	std::cout << std::endl;
 }
 void	PhoneBook::default_pb_line(int idx)
 {
-	std::cout << '|' ;
-	std::cout << std::setw(10) << idx << '|';
-	std::cout << std::setw(10)  << ' '  <<  '|'
-			<< std::setw(10)  << ' '  <<  '|'
-			<< std::setw(10)  << ' '  <<  '|' << std::endl;
+	std::cout << "|" ;
+	std::cout << std::setw(10) << idx << "|";
+	std::cout << std::setw(10) << " " << "|";
+	std::cout << std::setw(10) << " " << "|";
+	std::cout << std::setw(10) << " " << "|";
+	std::cout << std::endl;
 }
 
 void	PhoneBook::lenth_check_print(std::string &string)
 {
 	static const int max_len = 10;
 	
+	std::string add_string = string.substr(0, 9) + ".";
+
 	if (string.size() >= max_len)
-		std::cout<< std::setw(10) << std::right << string.substr(0, 9) << '.' <<  '|';
+		std::cout << std::setw(10) << add_string <<  "|";
 	else
-		std::cout << std::setw(10) << std::right << string << '|';
+		std::cout << std::setw(10) << string << "|";
 }
 
-void	PhoneBook::pb_line (Contact &contact, int idx)
+void	PhoneBook::pb_line(Contact &contact, int idx)
 {
-	std::cout << '|';
-	std::cout << std::setw(10) << idx << '|';
+	std::cout << "|";
+	std::cout << std::setw(10) << idx << "|";
 	lenth_check_print(contact.get_first_name());
 	lenth_check_print(contact.get_last_name());
 	lenth_check_print(contact.get_nickname());
@@ -157,11 +187,13 @@ void	PhoneBook::set_phonebook(void)
 
 void PhoneBook::print_info(int idx)
 {
+	std::cout << "===============================================" << std::endl;
 	std::cout << "First name: "<< phonebook[idx].get_first_name() << std::endl;
 	std::cout << "Last name: "<< phonebook[idx].get_last_name() << std::endl;
 	std::cout << "Nickname: "<< phonebook[idx].get_nickname() << std::endl;
 	std::cout << "Phone number: "<< phonebook[idx].get_phone_number() << std::endl;
 	std::cout << "Secret: "<< phonebook[idx].get_secret() << std::endl;
+	std::cout << "===============================================" << std::endl;
 }
 
 bool	PhoneBook::print_contact(void)
@@ -175,8 +207,12 @@ bool	PhoneBook::print_contact(void)
 
 	if (num < 0 || num > 7)
 	{
-		std::cout <<  "Not a valid index number." << std::endl;
+		std::cout <<  "-> index error : Not a valid index number.\n" << std::endl;
 		return (false);
+	}
+	else if (num >= total_add_count)
+	{
+		std::cout << "-> index error : An empty index.\n" << std::endl;
 	}
 	else
 		print_info(num);
@@ -198,7 +234,7 @@ bool	PhoneBook::select_command (const std::string &input)
 	}
 	else
 	{
-		std::cout << " Exit the phonebook." << std::endl;
+		std::cout << "-> Exit the phonebook." << std::endl;
 		exit(0);
 	}
 }
