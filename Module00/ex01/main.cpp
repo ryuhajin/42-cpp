@@ -13,7 +13,7 @@ int main(void)
 		p.input_check(input);
 		if (p.command_check(input) == false)
 		{	
-			std::cout << "-> Command error. Please enter agein.\n" << std::endl;
+			std::cout << "-> Command error. Please enter again.\n" << std::endl;
 			continue;
 		}
 		else

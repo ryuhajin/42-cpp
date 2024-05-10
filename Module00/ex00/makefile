@@ -6,7 +6,7 @@ NAME = megaphone
 
 SRCS = megaphone.cpp
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:.cpp=.o)
 
 all : $(NAME)
 
