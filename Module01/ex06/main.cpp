@@ -10,9 +10,9 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	std::string input(argv[1]);
 	Harl harl;
 
+	std::string input(argv[1]);
 	harl.complain(input);
 
 	return (0);
