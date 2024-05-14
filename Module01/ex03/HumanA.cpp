@@ -13,5 +13,5 @@ HumanA::~HumanA()
 
 void	HumanA::attack(void)
 {
-	std::cout << name << " attacks with their " << weapon << std::endl;
+	std::cout << name << " attacks with their " << weapon.getType() << std::endl;
 }
