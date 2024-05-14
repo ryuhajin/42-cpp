@@ -26,7 +26,9 @@ void replace_str (std::ifstream &original, std::ofstream &replace_file, std::str
 			str = str.substr(0, idx) + s2 + str.substr(idx + s1_len);
 			idx = str.find(s1, idx + s2_len);
 		}
-		replace_file << str << std::endl;
+		replace_file << str;
+		if (!original.eof())
+			replace_file << std::endl;
 	}
 }
 
