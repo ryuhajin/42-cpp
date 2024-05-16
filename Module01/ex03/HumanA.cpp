@@ -1,10 +1,10 @@
 #include "HumanA.h"
 #include <iostream>
 
-HumanA::HumanA(const std::string &input, const Weapon &type)
+HumanA::HumanA(const std::string& input, Weapon &type)
+		: name(input)
+		, weapon(type)
 {
-	name = input;
-	weapon = type;
 }
 
 HumanA::~HumanA()
