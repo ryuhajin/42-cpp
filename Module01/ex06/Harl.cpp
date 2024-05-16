@@ -1,15 +1,13 @@
 # include "Harl.h"
 #include <iostream>
 
-Harl::Harl(/* args */)
+Harl::Harl()
 {
 }
 
 Harl::~Harl()
 {
 }
-
-//priviate
 
 void	Harl::debug(void)
 {
@@ -30,7 +28,6 @@ void	Harl::error(void)
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
 
-//public
 void Harl::complain(std::string level)
 {
 	void (Harl::*f[4])(void) = 
