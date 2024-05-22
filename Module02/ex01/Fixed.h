@@ -22,5 +22,6 @@ public:
 };
 
 std::ostream& operator << (std::ostream &out, const Fixed &input);
+void print_bit(unsigned char *ptr, int size);
 
 #endif

@@ -22,14 +22,12 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const int input)
 {
-	std::cout << "-> Int Constructor Called" << std::endl;
 	value = input << fractional_bit;
 }
 
 Fixed::Fixed(const float input)
 {
-	std::cout << "-> Float Constructor Called" << std::endl;
-	value = roundf(input) * 256;
+	value = roundf(input * 256);
 }
 
 //Operator
@@ -81,4 +79,20 @@ int Fixed::toInt(void) const
 	temp = value >> fractional_bit;
 	
 	return (temp);
+}
+
+
+//Function
+void print_bit(unsigned char *ptr, int size)
+{
+	std::cout << "bit : ";
+	for(int i = size - 1; i >= 0; i--)
+	{
+		for(int j = 7; j > -1; j--)
+		{
+			std::cout << (((*(ptr + i)) >> j & 1) ? 1 : 0);
+		}
+		std::cout << " ";
+	}
+	std::cout << std::endl;
 }
