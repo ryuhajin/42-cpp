@@ -28,11 +28,12 @@ public:
 	Fixed	operator / (const Fixed& input);
 
 	Fixed&	operator ++ (void);
-	Fixed operator ++ (int);
+	Fixed	operator ++ (int);
 
-	// Fixed& operator -- (void);
-	// Fixed& operator -- (int);
+	Fixed&	operator -- (void);
+	Fixed	operator -- (int);
 
+	//function
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
 	float toFloat( void ) const;

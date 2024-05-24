@@ -22,11 +22,13 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const int input)
 {
+	std::cout << "[constructor] int : " << input << std::endl;
 	value = input << fractional_bit;
 }
 
 Fixed::Fixed(const float input)
 {
+	std::cout << "[constructor] float : " << input << std::endl;
 	value = roundf(input * 256.0f);
 }
 
@@ -102,6 +104,19 @@ Fixed Fixed::operator ++ (int)
 {
 	Fixed temp(*this);
 	++value;
+	return (temp);
+}
+
+Fixed& Fixed::operator -- (void)
+{
+	--value;
+	return (*this);
+}
+
+Fixed Fixed::operator -- (int)
+{
+	Fixed temp(*this);
+	--value;
 	return (temp);
 }
 
