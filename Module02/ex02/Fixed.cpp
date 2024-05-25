@@ -6,36 +6,36 @@
 Fixed::Fixed()
 		:value(0)
 {
-	std::cout << "-> Default Constructor Called" << std::endl;
+	std::cout << "[constructor] Default Called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& input)
 		:value(input.value)
 {
-	std::cout << "-> Copy constructor Called" << std::endl;
+	std::cout << "[Constructor] Copy Called" << std::endl;
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "-> Destructor Called" << std::endl;
+	std::cout << "[Destructor] Called" << std::endl;
 }
 
 Fixed::Fixed(const int input)
 {
-	std::cout << "[constructor] int : " << input << std::endl;
+	std::cout << "[Constructor] int : " << input << " Called" << std::endl;
 	value = input << fractional_bit;
 }
 
 Fixed::Fixed(const float input)
 {
-	std::cout << "[constructor] float : " << input << std::endl;
+	std::cout << "[Constructor] float : " << input << " Called" << std::endl;
 	value = roundf(input * 256.0f);
 }
 
 //Operator
 Fixed& Fixed::operator = (const Fixed& input)
 {
-	std::cout << "Copy assignment = operator called" << std::endl;
+	std::cout << "[Operator] Copy assignment called" << std::endl;
 	if (this == &input)
 		return (*this);
 
@@ -86,12 +86,16 @@ Fixed Fixed::operator - (const Fixed& input)
 
 Fixed Fixed::operator * (const Fixed& input)
 {
-	return (Fixed (value * input.getRawBits()));
+	Fixed	temp;
+	temp.setRawBits(value * input.getRawBits() / 256);
+	return (temp);
 }
 
 Fixed Fixed::operator / (const Fixed& input)
 {
-	return (Fixed (value / input.getRawBits()));
+	Fixed	temp;
+	temp.setRawBits((value << 8) / input.getRawBits());
+	return (temp);
 }
 
 Fixed& Fixed::operator ++ (void)
@@ -126,7 +130,6 @@ std::ostream& operator << (std::ostream &out, const Fixed &input)
 	return (out);
 }
 
-
 //Member Funtion
 int Fixed::getRawBits(void) const
 {
@@ -145,7 +148,7 @@ float Fixed::toFloat(void) const
 {
 	float temp;
 
-	temp = ((float)value) / 256;
+	temp = ((float)value) / 256.0f;
 
 	return (temp);
 }
@@ -159,6 +162,46 @@ int Fixed::toInt(void) const
 	return (temp);
 }
 
+//static member function
+Fixed&	Fixed::min(Fixed& f1, Fixed& f2)
+{
+	if (f1.getRawBits() == f2.getRawBits())
+		return(f1);
+	else if (f1.getRawBits() < f2.getRawBits())
+		return (f1);
+	else
+		return (f2);
+}
+
+const Fixed& Fixed::min(const Fixed& f1, const Fixed& f2)
+{
+	if (f1.getRawBits() == f2.getRawBits())
+		return(f1);
+	else if (f1.getRawBits() < f2.getRawBits())
+		return (f1);
+	else
+		return (f2);
+}
+
+Fixed& Fixed::max(Fixed& f1, Fixed& f2)
+{
+	if (f1.getRawBits() == f2.getRawBits())
+		return(f1);
+	else if (f1.getRawBits() > f2.getRawBits())
+		return (f1);
+	else
+		return (f2);
+}
+
+const Fixed& Fixed::max(const Fixed& f1, const Fixed& f2)
+{
+	if (f1.getRawBits() == f2.getRawBits())
+		return(f1);
+	else if (f1.getRawBits() > f2.getRawBits())
+		return (f1);
+	else
+		return (f2);
+}
 
 //Function
 void print_bit(unsigned char *ptr, int size)
