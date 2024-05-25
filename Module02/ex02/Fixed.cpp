@@ -165,9 +165,7 @@ int Fixed::toInt(void) const
 //static member function
 Fixed&	Fixed::min(Fixed& f1, Fixed& f2)
 {
-	if (f1.getRawBits() == f2.getRawBits())
-		return(f1);
-	else if (f1.getRawBits() < f2.getRawBits())
+	if (f1.getRawBits() <= f2.getRawBits())
 		return (f1);
 	else
 		return (f2);
@@ -175,9 +173,7 @@ Fixed&	Fixed::min(Fixed& f1, Fixed& f2)
 
 const Fixed& Fixed::min(const Fixed& f1, const Fixed& f2)
 {
-	if (f1.getRawBits() == f2.getRawBits())
-		return(f1);
-	else if (f1.getRawBits() < f2.getRawBits())
+	if (f1.getRawBits() <= f2.getRawBits())
 		return (f1);
 	else
 		return (f2);
@@ -185,9 +181,7 @@ const Fixed& Fixed::min(const Fixed& f1, const Fixed& f2)
 
 Fixed& Fixed::max(Fixed& f1, Fixed& f2)
 {
-	if (f1.getRawBits() == f2.getRawBits())
-		return(f1);
-	else if (f1.getRawBits() > f2.getRawBits())
+	if (f1.getRawBits() >= f2.getRawBits())
 		return (f1);
 	else
 		return (f2);
@@ -195,9 +189,7 @@ Fixed& Fixed::max(Fixed& f1, Fixed& f2)
 
 const Fixed& Fixed::max(const Fixed& f1, const Fixed& f2)
 {
-	if (f1.getRawBits() == f2.getRawBits())
-		return(f1);
-	else if (f1.getRawBits() > f2.getRawBits())
+	if (f1.getRawBits() >= f2.getRawBits())
 		return (f1);
 	else
 		return (f2);

@@ -6,34 +6,36 @@
 Fixed::Fixed()
 		:value(0)
 {
-	std::cout << "-> Default Constructor Called" << std::endl;
+	std::cout << "[constructor] Default Called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& input)
 		:value(input.value)
 {
-	std::cout << "-> Copy constructor Called" << std::endl;
+	std::cout << "[Constructor] Copy Called" << std::endl;
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "-> Destructor Called" << std::endl;
+	std::cout << "[Destructor] Called" << std::endl;
 }
 
 Fixed::Fixed(const int input)
 {
+	std::cout << "[Constructor] int : " << input << " Called" << std::endl;
 	value = input << fractional_bit;
 }
 
 Fixed::Fixed(const float input)
 {
-	value = roundf(input * 256);
+	std::cout << "[Constructor] float : " << input << " Called" << std::endl;
+	value = roundf(input * 256.0f);
 }
 
 //Operator
 Fixed& Fixed::operator = (const Fixed& input)
 {
-	std::cout << "Copy assignment = operator called" << std::endl;
+	std::cout << "[Operator] Copy assignment called" << std::endl;
 	if (this == &input)
 		return (*this);
 
@@ -47,7 +49,6 @@ std::ostream& operator << (std::ostream &out, const Fixed &input)
 	out << input.toFloat();
 	return (out);
 }
-
 
 //Member Funtion
 int Fixed::getRawBits(void) const
@@ -67,7 +68,7 @@ float Fixed::toFloat(void) const
 {
 	float temp;
 
-	temp = ((float)value) / 256;
+	temp = ((float)value) / 256.0f;
 
 	return (temp);
 }

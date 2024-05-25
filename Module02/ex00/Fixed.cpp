@@ -1,21 +1,22 @@
 #include "Fixed.h"
 #include <iostream>
 
+//Constructor, Destructor
 Fixed::Fixed()
 		:value(0)
 {
-	std::cout << "-> Default Constructor Called" << std::endl;
+	std::cout << "[constructor] Default Called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& input)
 		:value(input.value)
 {
-	std::cout << "-> Copy constructor Called" << std::endl;
+	std::cout << "[Constructor] Copy Called" << std::endl;
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "-> Destructor Called" << std::endl;
+	std::cout << "[Destructor] Called" << std::endl;
 }
 
 Fixed& Fixed::operator = (const Fixed& input)
