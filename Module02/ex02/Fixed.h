@@ -15,17 +15,18 @@ public:
 	~Fixed();
 
 	Fixed& operator = (const Fixed& input);
-	bool	operator > (const Fixed& input);
-	bool	operator < (const Fixed& input);
-	bool	operator >= (const Fixed& input);
-	bool	operator <= (const Fixed& input);
-	bool	operator == (const Fixed& input);
-	bool	operator != (const Fixed& input);
 
-	Fixed	operator + (const Fixed& input);
-	Fixed	operator - (const Fixed& input);
-	Fixed	operator * (const Fixed& input);
-	Fixed	operator / (const Fixed& input);
+	bool	operator > (const Fixed& input) const;
+	bool	operator < (const Fixed& input) const;
+	bool	operator >= (const Fixed& input) const;
+	bool	operator <= (const Fixed& input) const;
+	bool	operator == (const Fixed& input) const;
+	bool	operator != (const Fixed& input) const;
+
+	Fixed	operator + (const Fixed& input) const;
+	Fixed	operator - (const Fixed& input) const;
+	Fixed	operator * (const Fixed& input) const;
+	Fixed	operator / (const Fixed& input) const;
 
 	Fixed&	operator ++ (void);
 	Fixed	operator ++ (int);

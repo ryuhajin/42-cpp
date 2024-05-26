@@ -44,54 +44,58 @@ Fixed& Fixed::operator = (const Fixed& input)
 	return (*this);
 }
 
-bool	Fixed::operator > (const Fixed& input)
+bool	Fixed::operator > (const Fixed& input) const
 {
 	return (value > input.getRawBits());
 }
 
-bool	Fixed::operator < (const Fixed& input)
+bool	Fixed::operator < (const Fixed& input) const
 {
 	return (value < input.getRawBits());
 }
 
-bool	Fixed::operator >= (const Fixed& input)
+bool	Fixed::operator >= (const Fixed& input) const
 {
 	return	(value >= input.getRawBits());
 }
 
-bool	Fixed::operator <= (const Fixed& input)
+bool	Fixed::operator <= (const Fixed& input) const
 {
 	return (value <= input.getRawBits());
 }
 
-bool	Fixed::operator == (const Fixed& input)
+bool	Fixed::operator == (const Fixed& input) const
 {
 	return (value == input.getRawBits());
 }
 
-bool	Fixed::operator != (const Fixed& input)
+bool	Fixed::operator != (const Fixed& input) const
 {
 	return (value != input.getRawBits());
 }
 
-Fixed Fixed::operator + (const Fixed& input)
+Fixed Fixed::operator + (const Fixed& input) const
 {
-	return (Fixed (value + input.getRawBits()));
+	Fixed temp;
+	temp.setRawBits(value + input.getRawBits());
+	return (temp);
 }
 
-Fixed Fixed::operator - (const Fixed& input)
+Fixed Fixed::operator - (const Fixed& input) const
 {
-	return (Fixed (value - input.getRawBits()));
+	Fixed	temp;
+	temp.setRawBits(value - input.getRawBits());
+	return (temp);
 }
 
-Fixed Fixed::operator * (const Fixed& input)
+Fixed Fixed::operator * (const Fixed& input) const
 {
 	Fixed	temp;
 	temp.setRawBits(value * input.getRawBits() / 256);
 	return (temp);
 }
 
-Fixed Fixed::operator / (const Fixed& input)
+Fixed Fixed::operator / (const Fixed& input) const
 {
 	Fixed	temp;
 	temp.setRawBits((value << 8) / input.getRawBits());
