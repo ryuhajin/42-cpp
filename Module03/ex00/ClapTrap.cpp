@@ -35,6 +35,9 @@ void	ClapTrap::attack(const std::string& target)
 	std::cout << "ClapTrap " << name <<
 	"attacks " <<  target << "causing " << attack_Damage
 	<< "points of damage!" << std::endl;
+
+	//hit point = health
+	//energy point = mana
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)
