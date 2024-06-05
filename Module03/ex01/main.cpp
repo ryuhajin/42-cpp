@@ -8,30 +8,30 @@ int main()
 	ScavTrap teemo("teemo");
 	ScavTrap lulu("lulu");
 
-	ClapTrap lucian("Lucian");
-
 	//hit point check
 	teemo.takeDamage(5);
 	teemo.takeDamage(5);
 	teemo.takeDamage(90);
 	teemo.attack("Lucian");
 	teemo.beRepaired(100);
+	teemo.guardGate();
 
+	std::cout << std::endl;
 	//energy point check
 	for (size_t i = 0; i < 51; i++)
 	{
 		sena.attack("Lucian");
 	}
 	sena.beRepaired(100);
+	sena.guardGate();
+
+	std::cout << std::endl;
 
 	//Scav trap skill
 	lulu.guardGate();
 	lulu.attack("sena");
 	sena.takeDamage(20);
 	lulu.beRepaired(100);
-
-	//Claptrap guardgate
-	// lucian.guardGate();
 
 	return (0);
 }

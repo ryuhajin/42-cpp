@@ -7,7 +7,7 @@ NAME = ex00
 SRCS = main.cpp \
 		ClapTrap.cpp
 
-INCS = -I ClapTrap.hpp
+# INCS = -I header
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -16,7 +16,7 @@ MMD = $(SRCS:.cpp=.d)
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-		$(CC) $(CFLAG) $(OBJS) -o $(NAME) $(INCS)
+		$(CC) $(CFLAG) $(OBJS) -o $(NAME)
 
 %.o : %.cpp
 	 $(CC) $(CFLAG) -c $^ -o $@

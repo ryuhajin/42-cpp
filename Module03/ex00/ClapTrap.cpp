@@ -2,14 +2,38 @@
 #include <iostream>
 #include <string>
 
-
-//기본 생성자 //복사생성자 // 대입연산자 만들기
+ClapTrap::ClapTrap()
+	:name("Default"), hit_Point(10), energy_Point(10), attack_Damage(0)
+{
+	std::cout << '\n';
+	std::cout << "[Constructor] ClapTrap" << '\n';
+	std::cout << "name : " << name << '\n';
+	std::cout << "hit Point : " << hit_Point << '\n';
+	std::cout << "energy Point : " << energy_Point << '\n';
+	std::cout << "attack Damage : " << attack_Damage << '\n';
+	std::cout << std::endl;
+}
 
 ClapTrap::ClapTrap(const std::string& in_name)
 	:name(in_name), hit_Point(10), energy_Point(10), attack_Damage(0)
 {
 	std::cout << '\n';
 	std::cout << "[Constructor] ClapTrap" << '\n';
+	std::cout << "name : " << name << '\n';
+	std::cout << "hit Point : " << hit_Point << '\n';
+	std::cout << "energy Point : " << energy_Point << '\n';
+	std::cout << "attack Damage : " << attack_Damage << '\n';
+	std::cout << std::endl;
+}
+
+ClapTrap::ClapTrap(const ClapTrap& in)
+	:name(in.name),
+	hit_Point(in.hit_Point),
+	energy_Point(in.energy_Point),
+	attack_Damage(in.attack_Damage)
+{
+	std::cout << '\n';
+	std::cout << "[Copy Constructor] ClapTrap" << std::endl;
 	std::cout << "name : " << name << '\n';
 	std::cout << "hit Point : " << hit_Point << '\n';
 	std::cout << "energy Point : " << energy_Point << '\n';
@@ -28,6 +52,20 @@ ClapTrap::~ClapTrap()
 	std::cout << std::endl;
 }
 
+ClapTrap& ClapTrap::operator = (const ClapTrap& in)
+{
+	std::cout << "[Operator] ClapTrap Copy assignment called." << std::endl;
+
+	if (this == &in)
+		return (*this);
+	
+	name = in.name;
+	hit_Point = in.hit_Point;
+	energy_Point = in.energy_Point;
+	attack_Damage = in.attack_Damage;
+
+	return (*this);
+}
 
 void	ClapTrap::attack(const std::string& target)
 {

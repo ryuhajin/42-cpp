@@ -18,7 +18,7 @@ MMD = $(SRCS:.cpp=.d)
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-		$(CC) $(CFLAG) $(OBJS) -o $(NAME) $(INCS)
+		$(CC) $(CFLAG) $(INCS) $(OBJS) -o $(NAME)
 
 %.o : %.cpp
 	 $(CC) $(CFLAG) -c $^ -o $@

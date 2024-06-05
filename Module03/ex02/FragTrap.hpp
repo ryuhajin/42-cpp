@@ -2,11 +2,12 @@
 
 class FragTrap : public ClapTrap
 {
-private:
-	/* data */
 public:
+	FragTrap();
+	FragTrap(const FragTrap& in);
 	FragTrap(const std::string & in_name);
 	~FragTrap();
 
+	FragTrap& operator = (const FragTrap& in);
 	void highFivesGuys(void);
 };
