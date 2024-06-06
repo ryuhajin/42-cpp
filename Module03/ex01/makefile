@@ -17,10 +17,10 @@ MMD = $(SRCS:.cpp=.d)
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-		$(CC) $(CFLAG) $(INCS) $(OBJS) -o $(NAME)
+		$(CC) $(CFLAG) $(OBJS) -o $(NAME)
 
 %.o : %.cpp
-	 $(CC) $(CFLAG) -c $^ -o $@
+	 $(CC) $(CFLAG) $(INCS) -c $^ -o $@
 
 clean : 
 		rm -rf $(OBJS) $(MMD)
