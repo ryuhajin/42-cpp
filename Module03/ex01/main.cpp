@@ -16,7 +16,7 @@ int main()
 	teemo.beRepaired(100);
 	teemo.guardGate();
 
-	std::cout << std::endl;
+	std::cout << '\n' << std::endl;
 	//energy point check
 	for (size_t i = 0; i < 51; i++)
 	{
@@ -25,7 +25,7 @@ int main()
 	sena.beRepaired(100);
 	sena.guardGate();
 
-	std::cout << std::endl;
+	std::cout << '\n' << std::endl;
 
 	//Scav trap skill
 	lulu.guardGate();

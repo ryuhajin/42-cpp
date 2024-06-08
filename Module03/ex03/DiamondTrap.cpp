@@ -59,6 +59,7 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& in)
 		return (*this);
 
 	ClapTrap::operator=(in);
+	name = in.name;
 
 	return (*this);
 }
