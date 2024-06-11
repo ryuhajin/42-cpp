@@ -1,19 +1,21 @@
 CC = c++
 
-CFLAG = -Wall -Werror -Wextra -std=c++98 -MMD -MP
+CFLAG = -Wall -Werror -Wextra -std=c++98 -MMD -MP -g
 
 NAME = ex00
 
 SRCS = main.cpp \
 		Animal.cpp \
+		WrongAnimal.cpp \
 		Cat.cpp \
+		WrongCat.cpp \
 		Dog.cpp
 
 INCS = -I.
 
 OBJS = $(SRCS:.cpp=.o)
 
-MMD = $(SRCS:.cpp=.d)
+DEPS = $(OBJS:%.o=%.d)
 
 all : $(NAME)
 
@@ -21,10 +23,10 @@ $(NAME) : $(OBJS)
 		$(CC) $(CFLAG) $(OBJS) -o $(NAME) 
 
 %.o : %.cpp
-	 $(CC) $(CFLAG) $(INCS) -c $^ -o $@
+	 $(CC) $(CFLAG) $(INCS) -c $< -o $@
 
 clean : 
-		rm -rf $(OBJS) $(MMD)
+		rm -rf $(OBJS) $(DEPS)
 
 fclean : clean 
 	    rm -rf $(NAME)
@@ -32,3 +34,5 @@ fclean : clean
 re : fclean all
 
 .PHONY : all clean fclean re
+
+-include $(DEPS)

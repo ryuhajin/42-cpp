@@ -8,8 +8,9 @@ class Cat : public Animal
 {
 public:
 	Cat();
-	Cat(const Cat& rhs);
-	Cat& operator=(const Cat& rhs);
+	Cat(const std::string& in_string);
+	Cat(const Cat& in);
+	Cat& operator=(const Cat& in);
 	~Cat();
 
 	void	makeSound(void) const;

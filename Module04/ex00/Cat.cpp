@@ -4,18 +4,23 @@
 Cat::Cat()
 	:Animal("Cat")
 {
-	std::cout << "[Constructor] Cat" << std::endl;
+	std::cout << "[Constructor] Cat" << '\n' << std::endl;
+}
+Cat::Cat(const std::string& in_string)
+	:Animal(in_string)
+{
+	std::cout << "[Constructor] Cat" << '\n' << std::endl;
 }
 
 Cat::Cat(const Cat& in)
 	:Animal(in)
 {
-	std::cout << "[Copy Constructor] Cat" << std::endl;
+	std::cout << "[Copy Constructor] Cat" << '\n' << std::endl;
 }
 
-Cat& Cat::operator=(const Cat& in)
+Cat& Cat::operator= (const Cat& in)
 {
-	std::cout << "[Copy operator] Cat" << std::endl;
+	std::cout << "[Copy operator] Cat" << '\n' << std::endl;
 
 	if (this == &in)
 		return (*this);
@@ -27,7 +32,7 @@ Cat& Cat::operator=(const Cat& in)
 
 Cat::~Cat()
 {
-	std::cout << "[Destructor] Cat" << std::endl;
+	std::cout << "[Destructor] Cat" << '\n' << std::endl;
 }
 
 void	Cat::makeSound(void) const

@@ -1,36 +1,44 @@
 # include "Animal.hpp"
+# include "WrongAnimal.hpp"
 # include "Cat.hpp"
+# include "WrongCat.hpp"
 # include "Dog.hpp"
+
 # include <iostream>
 # include <string>
 
 int main(void)
 {
-	const Animal * animal = new Animal();
-	Animal * cat = new Cat();
-	Animal * dog = new Dog();
+	const Animal* meta = new Animal();
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
+	
+	std::cout << j->getType() << " " << std::endl;
+	std::cout << i->getType() << " " << std::endl;
+	
+	i->makeSound();
+	j->makeSound();
+	meta->makeSound();
 
-	*dog = *animal;
-	std::cout << dog->getType();
+	std::cout << std::endl;
 
-	cat = dog;
-	cat->getType();
+	delete i;
+	delete j;
+	delete meta;
+
+	std::cout << "=========== WrongAnimal / WrongCat ===========" << '\n' << std::endl;
+
+	const WrongAnimal* meta2 = new WrongAnimal();
+	const WrongAnimal* k = new WrongCat();
+
+	std::cout << k->getType() << " " << std::endl;
+	k->makeSound();
+	meta2->makeSound();
+
+	std::cout << std::endl;
+
+	delete meta2;
+	delete k;
 
 	return (0);
 }
-
-// int main(void)
-// {
-// 	const Animal* meta = new Animal();
-// 	const Animal* j = new Dog();
-// 	const Animal* i = new Cat();
-	
-// 	std::cout << j->getType() << " " << std::endl;
-// 	std::cout << i->getType() << " " << std::endl;
-	
-// 	i->makeSound();
-// 	j->makeSound();
-// 	meta->makeSound();
-
-// 	return (0);
-// }

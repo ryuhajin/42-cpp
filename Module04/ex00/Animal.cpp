@@ -24,7 +24,7 @@ Animal::Animal(const Animal& in)
 	std::cout << "type :" << type << '\n' << std::endl;
 }
 
-Animal& Animal::operator=(const Animal& in)
+Animal& Animal::operator= (const Animal& in)
 {
 	std::cout << "[Copy operator] Animal" << '\n';
 

@@ -5,18 +5,24 @@
 Dog::Dog()
 	:Animal("Dog")
 {
-	std::cout << "[Constructor] Dog" << std::endl;
+	std::cout << "[Constructor] Dog" << '\n' << std::endl;
+}
+
+Dog::Dog(const std::string& in_string)
+	:Animal(in_string)
+{
+	std::cout << "[Constructor] Dog" << '\n' << std::endl;
 }
 
 Dog::Dog(const Dog& in)
 	:Animal(in)
 {
-	std::cout << "[Copy Constructor] Dog" << std::endl;
+	std::cout << "[Copy Constructor] Dog" << '\n' << std::endl;
 }
 
-Dog& Dog::operator=(const Dog& in)
+Dog& Dog::operator= (const Dog& in)
 {
-	std::cout << "[Copy operator] Dog" << std::endl;
+	std::cout << "[Copy operator] Dog" << '\n' << std::endl;
 
 	if (this == &in)
 		return (*this);
@@ -28,7 +34,7 @@ Dog& Dog::operator=(const Dog& in)
 
 Dog::~Dog()
 {
-	std::cout << "[Destructor] Dog" << std::endl;
+	std::cout << "[Destructor] Dog" << '\n' << std::endl;
 }
 
 void	Dog::makeSound(void) const
