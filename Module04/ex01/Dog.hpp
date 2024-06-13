@@ -17,6 +17,8 @@ public:
 	~Dog();
 
 	void	makeSound(void) const;
+	Brain*	getBrain(void);
+	void	setBrain (const std::string& idea, int i);
 };
 
 #endif

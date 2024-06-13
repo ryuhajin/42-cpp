@@ -28,10 +28,7 @@ Dog& Dog::operator= (const Dog& in)
 
 	Animal::operator=(in);
 
-	Brain* copy_brain = new Brain(*in.brain);
-	delete brain;
-	
-	brain = copy_brain;
+	*brain = *in.brain;
 
 	return (*this);
 }
@@ -45,4 +42,14 @@ Dog::~Dog()
 void	Dog::makeSound(void) const
 {
 	std::cout << type << ": "<< "🐶 bark bark!!! 🐶" << std::endl;
+}
+
+Brain* Dog::getBrain(void)
+{
+	return (brain);
+}
+
+void Dog::setBrain (const std::string& idea, int i)
+{
+	brain->setIdeas(idea, i);
 }

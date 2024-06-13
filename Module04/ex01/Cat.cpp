@@ -27,7 +27,8 @@ Cat& Cat::operator= (const Cat& in)
 		return (*this);
 
 	Animal::operator=(in);
-	brain = in.brain;
+
+	*brain = *in.brain;
 
 	return (*this);
 }
