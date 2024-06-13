@@ -63,6 +63,8 @@
 		"vector": "cpp",
 		"deque": "cpp",
 		"fstream": "cpp",
-		"stack": "cpp"
+		"stack": "cpp",
+		"filesystem": "cpp",
+		"__functional_base_03": "cpp"
 	}
 }

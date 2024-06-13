@@ -1,5 +1,6 @@
 # include "IMateriaSource.hpp"
 # include "ICharacter.hpp"
+# include "Character.hpp"
 # include "AMateria.hpp"
 
 int main()
@@ -11,8 +12,8 @@ int main()
 	ICharacter* me = new Character("me");
 
 	AMateria* tmp;
-	tmp = src->createMateria("ice");
-	me->equip(tmp);
+	tmp = src->createMateria("ice"); //src == source
+	me->equip(tmp); // tmp == AMateria
 	tmp = src->createMateria("cure");
 	me->equip(tmp);
 
