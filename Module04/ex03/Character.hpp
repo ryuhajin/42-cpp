@@ -3,7 +3,6 @@
 
 #include "ICharacter.hpp"
 #include "AMateria.hpp"
-#include "Bottom.hpp"
 #include <string>
 
 class Character : public ICharacter
@@ -13,6 +12,7 @@ private:
 	AMateria* slot[4];
 public:
 	Character();
+	Character(const std::string & in_name);
 	Character(const Character& in);
 	Character& operator=(const Character& in);
 	~Character();

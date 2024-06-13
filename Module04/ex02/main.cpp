@@ -8,6 +8,11 @@
 # include <sstream>
 # include <cstdlib>
 
+void	check_leak(void)
+{
+	system("leaks ex02");
+}
+
 int main(void)
 {
 	const Animal* j = new Dog();

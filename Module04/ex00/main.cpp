@@ -7,6 +7,11 @@
 # include <iostream>
 # include <string>
 
+void	check_leak(void)
+{
+	system("leaks ex00");
+}
+
 int main(void)
 {
 	const Animal* meta = new Animal();

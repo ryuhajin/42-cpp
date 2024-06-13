@@ -9,6 +9,7 @@ Ice::Ice()
 }
 
 Ice::Ice(const Ice& in)
+	:AMateria(in.type)
 {
 	std::cout << "[Copy Constructor] Ice" << std::endl;
 }
@@ -16,6 +17,12 @@ Ice::Ice(const Ice& in)
 Ice& Ice::operator=(const Ice& in)
 {
 	std::cout << "[Copy operator=] Ice" << std::endl;
+
+	if (this == &in)
+		return (*this);
+
+	type = in.type;
+	return (*this);
 }
 
 Ice::~Ice()
@@ -28,7 +35,7 @@ AMateria* Ice::clone(void) const
 	return (new Ice());
 }
 
-void use(ICharacter& target)
+void Ice::use(ICharacter& target)
 {
-	std::cout << "Ice: * shoots an ice bolt at " << target.getName() << "*" << std::endl;
+	std::cout << '\n' << "Ice: * shoots an ice bolt at " << target.getName() << " *\n" << std::endl;
 }

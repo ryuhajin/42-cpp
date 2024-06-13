@@ -5,7 +5,11 @@ CFLAG = -Wall -Werror -Wextra -std=c++98 -MMD -MP -g
 NAME = ex03
 
 SRCS = main.cpp \
-		AMateria.cpp
+		MateriaSource.cpp \
+		AMateria.cpp \
+		Cure.cpp \
+		Ice.cpp \
+		Character.cpp
 
 INCS = -I.
 
