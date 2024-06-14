@@ -64,12 +64,9 @@ void	MateriaSource::learnMateria(AMateria* materia)
 	{
 		if (materia_slot[i] == NULL)
 		{
-			if (materia->getType() == "ice" || materia->getType() == "cure")
-			{
-				std::cout << '\n' << "#learn Materia : slot[" << i << "] materia type: " << materia->getType() << '\n' << std::endl;	
-				materia_slot[i] = materia;
-				return ;
-			}
+			std::cout << '\n' << "#learn Materia : slot[" << i << "] materia type: " << materia->getType() << '\n' << std::endl;	
+			materia_slot[i] = materia;
+			return ;
 		}
 	}
 }

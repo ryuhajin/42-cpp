@@ -7,6 +7,8 @@
 # include "Ice.hpp"
 # include "Cure.hpp"
 
+# include <iostream>
+
 void	check_leak(void)
 {
 	system("leaks ex03");

@@ -78,20 +78,17 @@ void	Character::equip (AMateria* m)
 {
 	if (m == NULL)
 	{
-		std::cout << "Unknown material. Cannot be equipped." << std::endl;
+		std::cout << "Unknown Material. cannot be equipped." << std::endl;
 		return ;
 	}
 
-	if (m->getType() == "ice" || m->getType() == "cure")
+	for (size_t i = 0; i < 4; i++)
 	{
-		for (size_t i = 0; i < 4; i++)
-		{
-			if (slot[i] == NULL)
-			{	
-				slot[i] = m;
-				std::cout << '\n' << "#Success equip slot[" << i << "] : " << m->getType() << ".\n" << std::endl;
-				return ;
-			}
+		if (slot[i] == NULL)
+		{	
+			slot[i] = m;
+			std::cout << '\n' << "#Success equip slot[" << i << "] : " << m->getType() << ".\n" << std::endl;
+			return ;
 		}
 	}
 

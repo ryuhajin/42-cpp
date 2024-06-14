@@ -14,6 +14,21 @@ AMateria::AMateria(std::string const & type)
 	std::cout << "[Constructor] AMateria : " << type << std::endl;
 }
 
+AMateria::AMateria(const AMateria& in)
+	:type(in.type)
+{
+	std::cout << "[Copy Constructor] AMateria : " << type << std::endl;
+}
+
+AMateria& AMateria::operator=(const AMateria& in)
+{
+	std::cout << "[Copy operator] AMateria : " << type << std::endl;
+
+	if (this == &in)
+		return (*this);
+	return (*this);
+}
+
 AMateria::~AMateria()
 {
 	std::cout << "[Destructor] AMateria : " << type << std::endl;
@@ -26,10 +41,5 @@ std::string const & AMateria::getType() const
 
 void AMateria::use(ICharacter& target)
 {
-	if (getType() == "ice")
-		std::cout << "Ice: * shoots an ice bolt at "
-		<< target.getName() << "*" << std::endl;
-	else
-		std::cout << "Cure: * heals " << target.getName()
-		<< "’s wounds *" << std::endl;	
+	(void)target;
 }
