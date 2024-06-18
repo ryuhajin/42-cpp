@@ -18,4 +18,6 @@ public:
 
 };
 
+std::ostream& operator << (std::ostream &out, const Form &input);
+
 #endif

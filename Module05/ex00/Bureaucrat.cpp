@@ -1,57 +1,70 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
+#include <string>
 
-Bureaucrat::Bureaucrat(const std::string& in_name, const unsigned int in_grade)
-    :name(in_name)
+Bureaucrat::Bureaucrat(const std::string& name, unsigned int grade)
+    :_name(name)
 {
-    if (in_grade < 1 || in_grade > 150)
-        throw std::out_of_range("Grade must be 1 ~ 150");
+    if (grade < 1)
+        throw Bureaucrat::GradeTooLowException();
+	if (grade > 150)
+		throw Bureaucrat::GradeTooHighException();
     
-    grade = in_grade;
-    std::cout << "[Constructor] Bureaucrat " << name << " grade : " << grade << std::endl;
+    this->_grade = grade;	// private 멤버 변수(==필드)의 경우 this-> or '_'grade 해준다
+    std::cout << "[Constructor] Bureaucrat " << _name << " grade : " << _grade << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& in)
-    :name(in.name), grade(in.grade)
+Bureaucrat::Bureaucrat(const Bureaucrat& other)
+    :_name(other.getName()), _grade(other.getGrade())
 {
-    std::cout << "[Copy Constructor] Bureaucrat " << name << " grade : " << grade << std::endl;
+    std::cout << "[Copy Constructor] Bureaucrat " << _name << " grade : " << _grade << std::endl;
 }
 
 Bureaucrat::~Bureaucrat()
 {
-    std::cout << "[Destructor] Bureaucrat " << name << std::endl;
+    std::cout << "[Destructor] Bureaucrat " << _name << std::endl;
 }
 
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat& in)
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
 {
     std::cout << "[Copy Operator=] grade copy." << std::endl;
-    grade = in.grade;
+	this->_grade = other.getGrade();
 
     return (*this);
 }
 
 const std::string& Bureaucrat::getName(void) const
 {
-    return (name);
+    return (this->_name);
 }
 
 unsigned int Bureaucrat::getGrade(void) const
 {
-    return (grade);
+    return (this->_grade);
 }
 
 void Bureaucrat::gradeUp(void)
 {
     if (getGrade() == 1)
-        throw std::out_of_range("too high grade");
-    grade--;
+        throw Bureaucrat::GradeTooHighException();
+    _grade--;
 }
 
 void Bureaucrat::gradeDown(void)
 {
     if (getGrade() == 150)
-        throw std::out_of_range("too low grade");
-    grade++;
+        throw Bureaucrat::GradeTooLowException();
+    _grade++;
+}
+
+const char* Bureaucrat::GradeTooHighException::what(void) const throw()
+{
+	return "too high grade";
+}
+
+const char* Bureaucrat::GradeTooLowException::what(void) const throw()
+{
+	return "too low grade";
 }
 
 std::ostream& operator << (std::ostream &out, const Bureaucrat &input)

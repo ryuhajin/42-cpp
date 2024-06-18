@@ -58,6 +58,6 @@ int main(void)
     {
         std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl;
     }
-    
+
     return (0);
 }
