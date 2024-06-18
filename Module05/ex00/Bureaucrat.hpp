@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-
+#include <stdexcept>
 class Bureaucrat
 {
 private:
@@ -12,14 +12,16 @@ private:
 
     Bureaucrat();
 public:
-    Bureaucrat(const std::string& name);
+    Bureaucrat(const std::string& in_name, const unsigned int in_grade);
+    Bureaucrat(const Bureaucrat& in);
     ~Bureaucrat();
 
-    const std::string getName(void) const;
-    unsigned int getGrade(void) const;
+    Bureaucrat& operator=(const Bureaucrat& in);
 
-    void gradeUp(unsigned int num);
-    void gradeDown(unsigned int num);
+    const std::string& getName(void) const;
+    unsigned int getGrade(void) const;
+    void gradeUp(void);
+    void gradeDown(void);
 };
 
 std::ostream& operator << (std::ostream &out, const Bureaucrat &input);
