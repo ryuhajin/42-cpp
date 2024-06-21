@@ -9,8 +9,8 @@ class PresidentialPardonForm : public AForm
 private:
 public:
 	PresidentialPardonForm();
-	PresidentialPardonForm(const PresidentialPardonForm& rhs);
-	PresidentialPardonForm& operator=(const PresidentialPardonForm& rhs);
+	PresidentialPardonForm(const PresidentialPardonForm& other);
+	PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
 	~PresidentialPardonForm();
 
 	void	execute(Bureaucrat const & executor) const;

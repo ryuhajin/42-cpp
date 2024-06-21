@@ -7,12 +7,14 @@
 class RobotomyRequestForm : public AForm
 {
 private:
-public:
 	RobotomyRequestForm();
-	RobotomyRequestForm(const RobotomyRequestForm& rhs);
-	RobotomyRequestForm& operator=(const RobotomyRequestForm& rhs);
+public:
+	RobotomyRequestForm(const std::string &target);
+	RobotomyRequestForm(const RobotomyRequestForm& other);
+	RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
 	~RobotomyRequestForm();
 
+	bool	randomFiftyFifty(void) const;
 	void	execute(Bureaucrat const & executor) const;
 };
 

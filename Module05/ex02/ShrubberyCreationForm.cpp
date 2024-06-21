@@ -4,6 +4,12 @@
 #include <fstream>
 #include <string>
 
+ShrubberyCreationForm::ShrubberyCreationForm(void)
+	:AForm("default", 145, 137)
+{
+	std::cout << "[Constructor] Shrubbery Form" << std::endl;
+}
+
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
 	:AForm(target, 145, 137)
 {
