@@ -1,43 +1,42 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+
 #include <iostream>
 #include <stdexcept>
 
 int main(void)
 {
-    //sign grade
     try
     {
-        Form a("Cake", 0, 30);
+		Bureaucrat zedd("Zedd", 150);
+		Bureaucrat teemo("Teemo", 145);
+		Bureaucrat yumi("Yumi", 137);
+       	
+		ShrubberyCreationForm sForm("LOL");
+		std::cout << '\n' << sForm;
+	
+		// zedd.signForm(sForm);
+		// sForm.beSigned(zedd);
+		// zedd.executeForm(sForm);
+		// sForm.execute(zedd);
+
+		// teemo.signForm(sForm);
+		// sForm.beSigned(teemo);
+		// teemo.executeForm(sForm);
+		// sForm.execute(teemo);
+
+		yumi.signForm(sForm);
+		sForm.beSigned(yumi);
+		yumi.executeForm(sForm);
+		sForm.execute(yumi);
     }
     catch (const std::exception & e)
     {
-        std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
+        std::cout << "[Error] " << e.what() << '\n' << std::endl; 
     }
 
-    try
-    {
-        Bureaucrat joy("Joy", 1);
-        Bureaucrat amumu("Amumu", 150);
-        Bureaucrat lulu("Lulu", 75);
-
-        Form cakeform("Cake", 75, 75);
-
-        // amumu.signForm(cakeform);
-        // cakeform.beSigned(amumu);
-    
-        lulu.signForm(cakeform);
-        cakeform.beSigned(lulu);
-    
-        joy.signForm(cakeform);
-        cakeform.beSigned(joy);
-
-        std::cout << cakeform;
-    }
-    catch(const std::exception& e)
-    {
-        std::cout << e.what() << '\n' << std::endl;
-    }
-    
     return (0);
 }

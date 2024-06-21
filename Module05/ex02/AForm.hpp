@@ -27,7 +27,7 @@ public:
     unsigned int        getExecuteGrade(void) const;
     bool                getSign(void) const;
     
-    void                beSigned(Bureaucrat &bureaucrat); //think
+    void                beSigned(Bureaucrat &bureaucrat);
     virtual void        execute(Bureaucrat const & executor) const = 0;
 
     //exception
@@ -35,8 +35,19 @@ public:
 		public:
 			virtual const char* what() const throw();
 	};
+
     class GradeTooLowException : public std::exception {
 		public:
+			virtual const char* what() const throw();
+	};
+
+	class signedFalseException : public std::exception {
+		public:
+			virtual const char* what() const throw();
+	};
+
+	class UnexpectedException : public std::exception {
+	public:
 			virtual const char* what() const throw();
 	};
 };

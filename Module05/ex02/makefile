@@ -8,7 +8,7 @@ SRCS = main.cpp \
 		Bureaucrat.cpp \
 		AForm.cpp \
 		PresidentialPardonForm.cpp \
-		ShrubberyCreationForm.cpp \ 
+		ShrubberyCreationForm.cpp \
 		RobotomyRequestForm.cpp
 
 INCS = -I.
