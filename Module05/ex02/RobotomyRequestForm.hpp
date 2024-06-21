@@ -11,8 +11,9 @@ private:
 public:
 	RobotomyRequestForm(const std::string &target);
 	RobotomyRequestForm(const RobotomyRequestForm& other);
-	RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
 	~RobotomyRequestForm();
+
+	RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
 
 	bool	randomFiftyFifty(void) const;
 	void	execute(Bureaucrat const & executor) const;

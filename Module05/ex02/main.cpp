@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
-// #include "PresidentialPardonForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 
@@ -17,7 +17,7 @@ int main(void)
 		Bureaucrat yumi("Yumi", 137);
        	
 		ShrubberyCreationForm sForm("Shrybbery");
-		std::cout << '\n' << sForm;
+		std::cout << '\n' << sForm << '\n';
 	
 		// zedd.signForm(sForm);
 		// sForm.beSigned(zedd);
@@ -47,7 +47,7 @@ int main(void)
 		Bureaucrat yumi("Yumi", 45);
        	
 		RobotomyRequestForm rForm("Robotomy");
-		std::cout << '\n' << rForm;
+		std::cout << '\n' << rForm << '\n';
 	
 		// zedd.signForm(rForm);
 		// rForm.beSigned(zedd);
@@ -68,6 +68,37 @@ int main(void)
     {
         std::cout << "[Error] " << e.what() << '\n' << std::endl; 
     }
+
+	//Pardon
+	try
+    {
+		Bureaucrat zedd("Zedd", 150);
+		Bureaucrat teemo("Teemo", 25);
+		Bureaucrat yumi("Yumi", 5);
+       	
+		PresidentialPardonForm pForm("Sylas");
+		std::cout << '\n' << pForm << '\n';
+	
+		// zedd.signForm(pForm);
+		// pForm.beSigned(zedd);
+		// zedd.executeForm(pForm);
+		// pForm.execute(zedd);
+
+		// teemo.signForm(pForm);
+		// pForm.beSigned(teemo);
+		// teemo.executeForm(pForm);
+		// pForm.execute(teemo);
+
+		yumi.signForm(pForm);
+		pForm.beSigned(yumi);
+		yumi.executeForm(pForm);
+		pForm.execute(yumi);
+    }
+    catch (const std::exception & e)
+    {
+        std::cout << "[Error] " << e.what() << '\n' << std::endl; 
+    }
+
 
     return (0);
 }
