@@ -1,63 +1,43 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 #include <stdexcept>
 
 int main(void)
 {
-    //constructor case
+    //sign grade
     try
     {
-        Bureaucrat joy("Joy", 0);
+        Form a("Cake", 0, 30);
     }
-    catch (const std::out_of_range& e)
+    catch (const std::exception & e)
     {
         std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
     }
 
-    try
-    {
-        Bureaucrat joy("Joy", 151);
-    }
-    catch (const std::out_of_range& e)
-    {
-        std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
-    }
-
-    //grade function case
     try
     {
         Bureaucrat joy("Joy", 1);
-        joy.gradeUp();
-    }
-    catch (const std::out_of_range& e)
-    {
-        std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
-    }
-
-    try
-    {
         Bureaucrat amumu("Amumu", 150);
-        amumu.gradeDown();
-    }
-    catch (const std::out_of_range& e)
-    {
-        std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
-    }
+        Bureaucrat lulu("Lulu", 75);
 
-    //good case
-    try
-    {
-        Bureaucrat lulu("lulu", 30);
-        lulu.gradeUp();
-        std::cout << lulu;
+        Form cakeform("Cake", 75, 75);
 
-        lulu.gradeDown();
-        std::cout << lulu;
-    }
-    catch (const std::out_of_range& e)
-    {
-        std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl;
-    }
+        // amumu.signForm(cakeform);
+        // cakeform.beSigned(amumu);
+    
+        lulu.signForm(cakeform);
+        cakeform.beSigned(lulu);
+    
+        joy.signForm(cakeform);
+        cakeform.beSigned(joy);
 
+        std::cout << cakeform;
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << e.what() << '\n' << std::endl;
+    }
+    
     return (0);
 }

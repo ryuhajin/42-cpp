@@ -9,27 +9,19 @@ int main(void)
     {
         Bureaucrat joy("Joy", 0);
     }
-    catch (const Bureaucrat::GradeTooHighException & e)
+    catch (const std::exception & e)
     {
         std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
     }
-	catch (const Bureaucrat::GradeTooLowException & e)
-	{
-		std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
-	}
 
     try
     {
         Bureaucrat joy("Joy", 151);
     }
-	catch (const Bureaucrat::GradeTooHighException & e)
+	catch (const std::exception & e)
     {
         std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
     }
-	catch (const Bureaucrat::GradeTooLowException & e)
-	{
-		std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
-	}
 
     //grade function case
     try
@@ -37,28 +29,20 @@ int main(void)
         Bureaucrat joy("Joy", 1);
         joy.gradeUp();
     }
-	catch (const Bureaucrat::GradeTooHighException & e)
+	catch (const std::exception & e)
     {
         std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
     }
-	catch (const Bureaucrat::GradeTooLowException & e)
-	{
-		std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
-	}
 
     try
     {
         Bureaucrat amumu("Amumu", 150);
         amumu.gradeDown();
     }
-	catch (const Bureaucrat::GradeTooHighException & e)
+	catch (const std::exception & e)
     {
         std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
     }
-	catch (const Bureaucrat::GradeTooLowException & e)
-	{
-		std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
-	}
 
     //good case
     try
@@ -70,14 +54,10 @@ int main(void)
         lulu.gradeDown();
         std::cout << lulu;
     }
-	catch (const Bureaucrat::GradeTooHighException & e)
+	catch (const std::exception & e)
     {
         std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
     }
-	catch (const Bureaucrat::GradeTooLowException & e)
-	{
-		std::cout << "[Error] out of range : " << e.what() << '\n' << std::endl; 
-	}
     
     return (0);
 }

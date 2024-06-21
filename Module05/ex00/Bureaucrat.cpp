@@ -1,6 +1,13 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 #include <string>
+
+Bureaucrat::Bureaucrat(void)
+    :_name("default"), _grade(150)
+{
+    std::cout << "[Constructor] Bureaucrat " << _name << " grade : " << _grade << std::endl;
+}
 
 Bureaucrat::Bureaucrat(const std::string& name, unsigned int grade)
     :_name(name)
@@ -10,7 +17,7 @@ Bureaucrat::Bureaucrat(const std::string& name, unsigned int grade)
 	if (grade > 150)
 		throw Bureaucrat::GradeTooHighException();
     
-    this->_grade = grade;	// private 멤버 변수(==필드)의 경우 this-> or '_'grade 해준다
+    this->_grade = grade;
     std::cout << "[Constructor] Bureaucrat " << _name << " grade : " << _grade << std::endl;
 }
 
