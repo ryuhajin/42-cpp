@@ -5,12 +5,12 @@
 
 Intern::Intern()
 {
-    std::cout << "[]" << std::endl;
+    std::cout << "[Constructor] Intern" << std::endl;
 }
 
 Intern::Intern(const Intern& other)
 {
-    std::cout << "[]" << std::endl;
+    std::cout << "[Copy Constructor] Intern" << std::endl;
     *this = other;
 }
 
@@ -22,7 +22,12 @@ Intern& Intern::operator= (const Intern& other)
 
 Intern::~Intern()
 {
-    std::cout << "[]" << std::endl;
+    std::cout << "[Destructor] Intern" << std::endl;
+}
+
+const char* Intern::UnexpectedException::what(void) const throw()
+{
+	return "\nNot in the correct format. makeForm fails!\n";
 }
 
 AForm* Intern::createShrubberyCreationForm(const std::string& target)
@@ -40,11 +45,28 @@ AForm* Intern::createPresidentialPardonForm(const std::string& target)
     return (new PresidentialPardonForm(target));
 }
 
-AForm* Intern::makeForm(const std::string& form, const std::string& target) const
+AForm* Intern::makeForm(const std::string& formName, const std::string& target) const
 {
-    f_Ptr form[3] = {
+    static Form createForm[3] = {
         &Intern::createShrubberyCreationForm,
         &Intern::createRobotomyRequestForm,
         &Intern::createPresidentialPardonForm
     };
+
+	static std::string formNames[3] = {
+		"shrubbery creation",
+        "robotomy request",
+        "presidential pardon"
+	};
+
+	for (size_t i = 0; i < 3; i++)
+	{
+		if (formName == formNames[i])
+		{
+			std::cout << "\nIntern creates " << formNames[i] << '\n' << std::endl;
+			return (createForm[i](target));
+		}
+	}
+	
+	throw(Intern::UnexpectedException());
 }

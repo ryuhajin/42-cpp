@@ -7,6 +7,7 @@
 #include "PresidentialPardonForm.hpp"
 
 #include <string>
+#include <stdexcept>
 
 class Intern
 {
@@ -17,7 +18,12 @@ public:
 
     Intern&   operator= (const Intern& other);
 
-    AForm* makeForm(const std::string& form, const std::string& target) const;
+    AForm* makeForm(const std::string& formName, const std::string& target) const;
+
+	class UnexpectedException : public std::exception {
+		public:
+			virtual const char* what() const throw();
+	};
 
 private:
     static AForm* createShrubberyCreationForm(const std::string& target);
@@ -25,6 +31,6 @@ private:
     static AForm* createPresidentialPardonForm(const std::string& target);
 };
 
-typedef AForm* (*f_Ptr)(const std::string&);
+typedef AForm* (*Form)(const std::string&);
 
 #endif
