@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-// :: <- 네임 스페이스 지정 없이 선언된 모든 이름이 포함되는 공간. 전역 네임 스페이스
+// :: <- 네임 스페이스 지정 없이 선언된 모든 이름이 포함되는 공간.
 // int main( void ) {
 //     int a = 2;
 //     int b = 3;
