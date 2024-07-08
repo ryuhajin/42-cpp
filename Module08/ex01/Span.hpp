@@ -22,6 +22,19 @@ public:
 	void	addNumber(int value);
 	int		shortestSpan(void);
 	int		longestSpan(void);
-};
+	void	print_value(void) const;
+
+	template <typename Iterator>
+	void Span::addNumbers(Iterator begin, Iterator end)
+	{
+		while (begin != end)
+		{
+			if (_value.size() >= _size)
+				throw std::out_of_range("size if pull. Cannot add value.");
+
+			_value.push_back(*begin);
+			++begin;
+    	}
+	};
 
 #endif
