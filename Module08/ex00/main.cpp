@@ -1,3 +1,11 @@
 #include <vector>
+#include <list>
+#include <deque>
 
-std::vector<int>
+#include "easyfind.hpp"
+
+int main(void)
+{
+
+	return (0);
+}

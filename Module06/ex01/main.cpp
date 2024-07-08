@@ -28,7 +28,6 @@ int main(void)
 
     std::cout << "[test]" << std::endl;
 	std::cout << "Address of i: " << &i << std::endl;
-	std::cout << "Address of data_ptr: " << data_ptr << std::endl;
 
 	u_ptr = Serializer::serialize(data_ptr);
 	std::cout << "uintptr_t: " << u_ptr << std::endl;
