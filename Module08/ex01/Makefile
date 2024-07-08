@@ -4,7 +4,8 @@ CFLAG = -Wall -Werror -Wextra -std=c++98 -MMD -MP -g
 
 NAME = ex01
 
-SRCS = main.cpp
+SRCS = main.cpp \
+		Span.cpp
 
 INCS = -I.
 
