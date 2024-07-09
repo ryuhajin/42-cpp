@@ -27,7 +27,7 @@ Span::~Span()
 
 void Span::addNumber(int value)
 {
-	if(this->_size <= _value.size())
+	if(this->_size <= this->_numbers.size())
 		throw std::out_of_range("size if pull. Cannot add value.");
 	
 	_numbers.push_back(value);

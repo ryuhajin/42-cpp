@@ -25,16 +25,17 @@ public:
 	void	print_value(void) const;
 
 	template <typename Iterator>
-	void Span::addNumbers(Iterator begin, Iterator end)
+	void addNumbers(Iterator begin, Iterator end)
 	{
 		while (begin != end)
 		{
-			if (_value.size() >= _size)
+			if (this->_size <= this->_numbers.size())
 				throw std::out_of_range("size if pull. Cannot add value.");
 
 			_value.push_back(*begin);
 			++begin;
     	}
-	};
+	}
+};
 
 #endif
