@@ -31,7 +31,9 @@ int main(void)
             int randomValue = std::rand();
             span.addNumber(randomValue);
         }
-		std::cout << span.print_value() << std::endl;
+		span.print_value();
+        std::cout << std::endl;
+        
         // shortestSpan과 longestSpan 결과 출력
         std::cout << "Shortest span: " << span.shortestSpan() << std::endl;
         std::cout << "Longest span: " << span.longestSpan() << std::endl;

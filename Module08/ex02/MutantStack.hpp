@@ -28,6 +28,36 @@ public:
 	{
 		return (std::stack<T>::c.end());
 	}
+
+	const_iterator begin() const
+	{
+		return (std::stack<T>::c.begin());
+	}
+
+	const_iterator end() const
+	{
+		return (std::stack<T>::c.end());
+	}
+
+	reverse_iterator rbegin()
+	{
+        return (std::stack<T>::c.rbegin());
+    }
+
+    reverse_iterator rend()
+	{
+        return (std::stack<T>::c.rend());
+    }
+
+    const_reverse_iterator rbegin() const
+	{
+        return (std::stack<T>::c.rbegin());
+    }
+
+    const_reverse_iterator rend() const
+	{
+        return (std::stack<T>::c.rend());
+    }
 };
 
 #endif
