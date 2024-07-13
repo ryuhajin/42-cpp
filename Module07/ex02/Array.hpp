@@ -63,6 +63,7 @@ Array<T>& Array<T>::operator=(const Array& other)
     
     delete[] _array;
 
+	this->_size = other._size;
     this->_array = new T[_size];
 
     for (size_t i = 0; i < _size; i++)
@@ -75,18 +76,18 @@ Array<T>& Array<T>::operator=(const Array& other)
 template <typename T>
 T& Array<T>::operator[] (unsigned int idx)
 {
-    if (idx >= _size) {
+    if (idx >= _size)
         throw std::out_of_range("Index out of range");
-    }
+
     return _array[idx];
 }
 
 template <typename T>
 const T& Array<T>::operator[] (unsigned int idx) const
 {
-    if (idx >= _size) {
+    if (idx >= _size)
         throw std::out_of_range("Index out of range");
-    }
+
     return _array[idx];
 }
 
