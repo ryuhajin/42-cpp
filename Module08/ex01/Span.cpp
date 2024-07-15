@@ -1,4 +1,8 @@
 #include "Span.hpp"
+#include <iostream>
+#include <vector>
+#include <stdexcept>
+#include <limits> 
 
 Span::Span()
 	:_size(0)
@@ -65,7 +69,7 @@ int Span::longestSpan(void)
 	return (max - min);
 }
 
-void print_value(void) const
+void Span::print_value(void) const
 {
 	for (size_t i = 0; i < _numbers.size(); i++)
 	{
