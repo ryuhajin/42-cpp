@@ -12,10 +12,16 @@ private:
 	std::map<std::string, float> _data;
 public:
 	BitcoinExchange();
-	BitcoinExchange(const BitcoinExchange& rhs);
-	BitcoinExchange& operator=(const BitcoinExchange& rhs);
+	BitcoinExchange(const BitcoinExchange& other);
+	BitcoinExchange& operator=(const BitcoinExchange& other);
 	~BitcoinExchange();
 
+	bool checkIss(const std::istringstream& ss);
+	bool checkDate(const std::string& date);
+	bool checkValue(std::istringstream& ss, float& value);
+	void printExchange(const std::string& date, float& value);
+	bool initData(std::string fileName);
+	bool inputExchange(std::string fileName);
 };
 
 #endif

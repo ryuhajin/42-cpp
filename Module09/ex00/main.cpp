@@ -1,8 +1,9 @@
 #include "BitcoinExchange.hpp"
 
 #include <iostream>
+#include <string>
 
-int main(int argc, char * argv[])
+int main(int argc, char* argv[])
 {
 	if (argc != 2)
 	{
@@ -11,7 +12,11 @@ int main(int argc, char * argv[])
 	}
 
 	BitcoinExchange btc;
-	if ()
+	if (!btc.initData("data.csv"))
+		return (1);
+
+	if (!btc.inputExchange(argv[1]))
+		return (1);
 
 	return (0);
 }
