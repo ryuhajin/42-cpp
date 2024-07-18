@@ -29,7 +29,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
 BitcoinExchange::~BitcoinExchange()
 {}
 
-bool BitcoinExchange::checkLine(const std::string& line, const std::string& delimiter, size_t idx)
+bool BitcoinExchange::findDelimiter(const std::string& line, const std::string& delimiter, size_t idx)
 {
 	size_t delim = line.find(delimiter);
 	// std::cout << "line  : " << line << '\n' << std::endl;
@@ -42,20 +42,24 @@ bool BitcoinExchange::checkLine(const std::string& line, const std::string& deli
 	return (true);
 }
 
-bool BitcoinExchange::checkIss(const std::istringstream& ss)
+bool BitcoinExchange::streamStatusCheck(std::istringstream& ss, double& value)
 {
-	if (ss.fail())
-		return (false);
-	else if (!(ss.eof()))
+	ss >> value;
+
+	if (ss.fail() || !(ss.eof()))
 	{
-		// std::cout << "checkIss not EOF!" << std::endl;
+		std::cerr << "Error : Value is not in the correct format. => " << value;
+		
+		std::string line;
+		while (std::getline(ss, line, '\n'))
+			std::cerr << line;
+		std::cerr << std::endl;
 		return (false);
 	}
-
 	return (true);
 }
 
-bool BitcoinExchange::checkDate(const std::string& date)
+bool BitcoinExchange::vaildDate(const std::string& date)
 {
 	std::tm tm = {};
 
@@ -84,17 +88,9 @@ bool BitcoinExchange::checkDate(const std::string& date)
 	return (true);
 }
 
-bool BitcoinExchange::checkValue(const std::string& sval, double& value)
+bool BitcoinExchange::vaildValue(double& value)
 {
-    std::istringstream ss(sval);
-	ss >> value;
-
-	if (!checkIss(ss))
-	{
-		std::cerr << "Error : Value is not in the correct format. => " << sval << std::endl;
-        return (false);
-    }
-	else if (value < 0)
+	if (value < 0)
 	{
 		std::cerr << "Error: not a positive number." << std::endl;
 		return (false);
@@ -116,7 +112,7 @@ void BitcoinExchange::printExchange(const std::string& date, double& value)
 		std::cout << "Error : No dates near you were found." << std::endl;
 	else
 	{
-		std::cout << "value : " << it->second << " amount : " << value << std::endl;
+		// std::cout << "value : " << it->second << " amount : " << value << std::endl;
 		std::cout << it->first << " => " << value << " = " << (it->second * value) << std::endl;
 	}
 }
@@ -144,16 +140,15 @@ bool BitcoinExchange::initData(std::string fileName)
 	{
 		if (line.find_first_not_of(" \t\n\r") == std::string::npos)
 			continue;
-		if (!checkLine(line, ",", 10))
+		if (!findDelimiter(line, ",", 10))
 			return  (false);
 		std::istringstream ss(line);
         std::string date;
 		std::getline(ss, date, ',');
-		if (!checkDate(date))
+		if (!vaildDate(date))
 			return (false);
 		double value;
-		ss >> value;
-		if (!checkIss(ss))
+		if (!streamStatusCheck(ss, value))
 			return (false);
 		_data[date] = value;
     }
@@ -182,17 +177,17 @@ bool BitcoinExchange::inputExchange(std::string fileName)
 	{
 		if (line.find_first_not_of(" \t\n\r") == std::string::npos)
 			continue;
-		if (!checkLine(line, " | ", 10))
+		if (!findDelimiter(line, " | ", 10))
 			continue;
 		std::istringstream ss(line);
         std::string date;
 		std::getline(ss, date, '|');
-		if (!checkDate(date))
+		if (!vaildDate(date))
 			continue;
-		std::string sval;
-		ss >> sval;
 		double value;
-		if (!checkValue(sval, value))
+		if (!streamStatusCheck(ss, value))
+			continue;
+		if (!vaildValue(value))
 			continue;
 		printExchange(date, value);
     }
