@@ -1,12 +1,13 @@
 #ifndef RPN_HPP
 # define RPN_HPP
 
-/* include */
+#include <stack>
 #include <string>
 
-class RPN : public ParentClass
+class RPN : public 
 {
 private:
+	stack<int> _rpn;
 public:
 	RPN();
 	RPN(const RPN& rhs);
