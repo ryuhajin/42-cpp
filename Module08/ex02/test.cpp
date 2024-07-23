@@ -68,7 +68,7 @@ void testIterators() {
 
 // MutantStack의 부모인 stack에 list, vector를 넣어 동작하나 테스트
 void testContainerTypes() {
-    MutantStack<int, std::vector<int>> vectorStack;
+    MutantStack<int, std::vector<int> > vectorStack;
     vectorStack.push(1);
     vectorStack.push(2);
     vectorStack.push(3);
@@ -80,7 +80,23 @@ void testContainerTypes() {
     }
     std::cout << std::endl;
 
-    MutantStack<int, std::list<int>> listStack;
+    // Using iterators
+    std::cout << "Using iterators with vector as container:" << std::endl;
+    for (int i = 1; i <= 3; ++i) vectorStack.push(i);
+
+    std::cout << "iterator: ";
+    for (MutantStack<int, std::vector<int> >::iterator it = vectorStack.begin(); it != vectorStack.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "reverse_iterator: ";
+    for (MutantStack<int, std::vector<int> >::reverse_iterator it = vectorStack.rbegin(); it != vectorStack.rend(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+
+    MutantStack<int, std::list<int> > listStack;
     listStack.push(4);
     listStack.push(5);
     listStack.push(6);
@@ -89,6 +105,22 @@ void testContainerTypes() {
     while (!listStack.empty()) {
         std::cout << listStack.top() << " ";
         listStack.pop();
+    }
+    std::cout << std::endl;
+
+    // Using iterators
+    std::cout << "Using iterators with list as container:" << std::endl;
+    for (int i = 4; i <= 6; ++i) listStack.push(i);
+
+    std::cout << "iterator: ";
+    for (MutantStack<int, std::list<int> >::iterator it = listStack.begin(); it != listStack.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "reverse_iterator: ";
+    for (MutantStack<int, std::list<int> >::reverse_iterator it = listStack.rbegin(); it != listStack.rend(); ++it) {
+        std::cout << *it << " ";
     }
     std::cout << std::endl;
 }
