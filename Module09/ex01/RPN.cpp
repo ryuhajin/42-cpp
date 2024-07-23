@@ -73,7 +73,7 @@ int RPN::calculator (int first, int second, char mathOperator)
 		break;
 
 	case '/' :
-		if ( second == 0)
+		if (second == 0)
 		{
 			std::cerr << "Error" << std::endl;
 			std::exit(1);
