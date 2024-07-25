@@ -19,21 +19,24 @@ public:
 
 	Span& operator=(const Span& other);
 	
-	void	addNumber(int value);
-	int		shortestSpan(void);
-	int		longestSpan(void);
-	void	print_value(void) const;
+	void				addNumber(int value);
+	int					shortestSpan(void);
+	int					longestSpan(void);
+	void				print_value(void);
+	std::vector<int>	getNumbers (void) const;
 
 	template <typename Iterator>
-	void addNumbers(Iterator begin, Iterator end)
+	void addNumbers(Iterator Vbegin, Iterator Vend)
 	{
-		while (begin != end)
+		while (Vbegin != Vend)
 		{
 			if (this->_size <= this->_numbers.size())
 				throw std::out_of_range("size if pull. Cannot add value.");
+			if (std::find(this->_numbers.begin(), this->_numbers.end(), *Vbegin) != this->_numbers.end())
+				throw std::invalid_argument("Cannot add value: Duplicate found.");
 
-			_numbers.push_back(*begin);
-			++begin;
+			_numbers.push_back(*Vbegin);
+			++Vbegin;
     	}
 	}
 };

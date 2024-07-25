@@ -94,5 +94,30 @@ int main()
     }
 	std::cout << std::endl;
 
+	std::cout << "================== const container check ==================" << std::endl;
+	const int arr[] = {1, 2, 3, 4, 5};
+    const std::vector<int> cVec(arr, arr + sizeof(arr) / sizeof(arr[0]));
+
+    try
+	{
+        std::vector<int>::const_iterator cit = easyfind(cVec, 4);
+        std::cout << "Found in const vector: " << *cit << std::endl;
+    }
+	catch (const std::exception& e)
+	{
+        std::cerr << e.what() << std::endl;
+    }
+
+	try
+	{
+        std::vector<int>::const_iterator cit = easyfind(cVec, 6);
+        std::cout << "Found in const vector: " << *cit << std::endl;
+    }
+	catch (const std::exception& e)
+	{
+        std::cerr << e.what() << std::endl;
+    }
+	std::cout << std::endl;
+	
     return (0);
 }

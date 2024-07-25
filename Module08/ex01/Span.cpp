@@ -1,5 +1,6 @@
 #include "Span.hpp"
 #include <iostream>
+#include <algorithm>
 #include <vector>
 #include <stdexcept>
 #include <limits> 
@@ -33,7 +34,10 @@ void Span::addNumber(int value)
 {
 	if(this->_size <= this->_numbers.size())
 		throw std::out_of_range("size if pull. Cannot add value.");
-	
+
+	if (std::find(this->_numbers.begin(), this->_numbers.end(), value) != this->_numbers.end())
+		throw std::invalid_argument("Cannot add value: Duplicate found.");
+
 	_numbers.push_back(value);
 }
 
@@ -69,11 +73,17 @@ int Span::longestSpan(void)
 	return (max - min);
 }
 
-void Span::print_value(void) const
+void Span::print_value(void)
 {
-	for (size_t i = 0; i < _numbers.size(); i++)
+	for (std::vector<int>::iterator it = this->_numbers.begin();
+		it != this->_numbers.end(); ++it)
 	{
-		std::cout << _numbers[i] << " ";
+		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
+}
+
+std::vector<int> Span::getNumbers (void) const
+{
+	return (this->_numbers);
 }
