@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <stdexcept>
-#include <limits> //ㅎㅔ더 c++98 건지 확인필요
+#include <limits>
 
 class Span
 {
