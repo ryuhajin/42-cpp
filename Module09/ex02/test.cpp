@@ -83,3 +83,41 @@ void	PmergeMe::MakePair(Vector& vector)
 		++j;
 	}
 }
+
+void VectorPmergeMe::MakeSequence(size_t size)
+{
+    size_t result = 1;
+    sequence.push_back(result);
+    for (int i = 2; result < size; i++)
+    {
+        result = pow(2, i) - sequence.back();
+        sequence.push_back(result);
+    }
+}
+
+namespace
+{
+	std::vector<std::size_t> getInsertionOrder(std::size_t size)
+	{
+		std::vector<std::size_t> result(size);
+		std::size_t square = 2;
+		std::size_t rangeEnd = 0;
+		std::size_t order = 0;
+
+		for (std::size_t i = 0; i < size; ++i)
+		{
+			if (i > rangeEnd)
+			{
+				square *= 2;
+				rangeEnd = square - i - 1;
+				if (rangeEnd >= size)
+				{
+					rangeEnd = size - 1;
+				}
+				order = rangeEnd;
+			}
+			result[i] = order--;
+		}
+		return (result);
+	}
+}
