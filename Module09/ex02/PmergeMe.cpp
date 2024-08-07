@@ -177,12 +177,18 @@ std::vector<size_t> generateInsertOrder (size_t size)
 
 void insertTails(std::vector<size_t> &insert, std::vector<std::pair<int, int> > &winners, std::vector<std::pair<int, int> > &losers)
 {
-    std::vector<std::pair<int, int> >::iterator it = winners.begin();
+    std::vector<std::pair<int, int> >::iterator it;
     
     for (size_t i = 0; i < losers.size(); i++)
     {
-        it = std::lower_bound(winners.begin(), winners.begin() + i + 1, losers[insert[i]]);
+        it = std::lower_bound(winners.begin(), winners.begin() + insert[i] + 1, losers[insert[i]]);
+		std::cout << "i = " << i << "\n";
+		std::cout << "insert loser = " << losers[insert[i]].first << "\n";
+		std::cout << "lower_bound it = " << (int)(*it).first << '\n' << std::endl;
         winners.insert(it, losers[insert[i]]);
+
+		std::cout << "!!! insert Winner !!! " << std::endl;
+		PmergeMe::printVec(winners);
     }
 }
 

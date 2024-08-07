@@ -18,5 +18,8 @@ int main(int argc, char* argv[])
     PmergeMe::printVec(vInput);
 
     PmergeMe::sort(vInput);
+
+	if (std::is_sorted(vInput.begin(), vInput.end()) == false)
+		std::cerr << "KO!" << std::endl;
     return (0);
 }
