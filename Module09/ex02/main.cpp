@@ -3,6 +3,10 @@
 #include <vector>
 #include <deque>
 
+bool compareFirstOnly(const std::pair<int, int>& a, const std::pair<int, int>& b) {
+    return a.first < b.first;
+}
+
 int main(int argc, char* argv[])
 {
     if (argc == 1)
@@ -19,7 +23,7 @@ int main(int argc, char* argv[])
 
     PmergeMe::sort(vInput);
 
-	if (std::is_sorted(vInput.begin(), vInput.end()) == false)
+	if (std::is_sorted(vInput.begin(), vInput.end(), compareFirstOnly) == false)
 		std::cerr << "KO!" << std::endl;
     return (0);
 }

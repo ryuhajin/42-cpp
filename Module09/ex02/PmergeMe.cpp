@@ -181,7 +181,7 @@ void insertTails(std::vector<size_t> &insert, std::vector<std::pair<int, int> > 
     
     for (size_t i = 0; i < losers.size(); i++)
     {
-        it = std::lower_bound(winners.begin(), winners.begin() + insert[i] + 1, losers[insert[i]]);
+        it = std::lower_bound(winners.begin(), winners.begin() + insert[i] + i, losers[insert[i]]);
 		std::cout << "i = " << i << "\n";
 		std::cout << "insert loser = " << losers[insert[i]].first << "\n";
 		std::cout << "lower_bound it = " << (int)(*it).first << '\n' << std::endl;
