@@ -35,7 +35,7 @@ bool PmergeMe::argvToVec(int argc, char *argv[], std::vector<std::pair<int, int>
             return (false);
         }
 
-        vec.push_back(std::make_pair(i -1, value));
+        vec.push_back(std::make_pair(value, i -1));
     }
 
     return (true);
@@ -60,14 +60,15 @@ void PmergeMe::PlayersMatches(std::vector<std::pair<int, int> > &heads, std::vec
     for (size_t i = 0; i < pivot; i++)
     {
         tails.push_back(heads.back());
-        tails[i].first = i;
+        heads[i].second = tails[i].first;
+        tails[i].second = heads[i].first;
         heads.pop_back();
     }
 
     if (loseByDefault)
     {
         tails.push_back(heads[pivot]);
-        tails[pivot].first = -1; //bydefault check
+        tails[pivot].second = -1; //bydefault check
         heads.erase(heads.begin() + pivot);
     }
 }
@@ -76,23 +77,48 @@ void PmergeMe::playersCompare (std::vector<std::pair<int, int> > &winners, std::
 {
     for (size_t i = 0; i < winners.size(); i++)
     {
-        if (winners[i].second < losers[i].second)
+        if (winners[i].first < losers[i].first)
             std::swap(winners[i], losers[i]);
     }
 }
 
+bool comparePairToFirst(const std::pair<int, int>& lhs, int rhs)
+{
+    return lhs.first < rhs;
+}
+
+bool comparePairToSecond(const std::pair<int, int>& lhs, int rhs)
+{
+    return lhs.second < rhs;
+}
+
 void playersIdxRenumber (std::vector<std::pair<int, int> > &winners, std::vector<std::pair<int, int> > &losers)
 {
-    std::vector<std::pair<int, int> > renumberTails;
+    std::cout << "*************** IdxRenumber start! ********************" << std::endl;
+    std::cout << " Original losers Idx " << std::endl;
+    PmergeMe::printVec(losers);
+
+    std::vector<std::pair<int, int> >::iterator it;
+
     for (size_t i = 0; i < winners.size(); i++)
     {
-        renumberTails.push_back(losers[winners[i].first]);
+        it = std::lower_bound(winners.begin(), winners.end(), losers[i].second, comparePairToFirst);
+        //나와 짝이었던 쌍의 idx로 second값 바꾸기
+        if (it != winners.end() && it->first == losers[i].second)
+            losers[i].second = std::distance(winners.begin(), it);
     }
 
-    if (winners.size() < losers.size())
-        renumberTails.push_back(losers.back());
-
+    std::vector<std::pair<int, int> > renumberTails;
+    for (size_t i = 0; i < losers.size(); i++)
+    {
+        it = std::lower_bound(losers.begin(), losers.end(), i, comparePairToSecond);
+        renumberTails.push_back(losers + it);
+    }
+    
     losers = renumberTails;
+
+    std::cout << " After losers Idx " << std::endl;
+    PmergeMe::printVec(losers);
 }
 
 void printInsert (std::vector<size_t> &insert)
@@ -135,9 +161,12 @@ std::vector<size_t> generateInsertOrder (size_t size)
 
 void insertTails(std::vector<size_t> &insert, std::vector<std::pair<int, int> > &winners, std::vector<std::pair<int, int> > &losers)
 {
-    for (size_t i = 0; i < insert.size(); i++)
+    std::vector<std::pair<int, int> >::iterator it = winners.begin();
+    
+    for (size_t i = 0; i < losers.size(); i++)
     {
-        
+        winners.insert(it, losers[insert[i]]);
+        it = std::lower_bound(winners.begin(), winners.begin() + i + 1, losers[insert[i]]);
     }
 }
 
@@ -162,8 +191,10 @@ void PmergeMe::sort(std::vector<std::pair<int, int> > &players)
     PmergeMe::printVec(tails);
 
     PmergeMe::sort(players); // 승자가 한명 남을 때 까지 재귀로 쌍을 짓고 그 쌍끼리 비교하여 승자조, 패자조를 나눔.
-    std::cout << "=============== Index Match ===============" << std::endl;
+
     playersIdxRenumber(players, tails); // tails remaster = players idx와 동일하게 있음.
+    
+    std::cout << "=============== Index Match ===============" << std::endl;
     std::cout << "[winners]" << std::endl;
     PmergeMe::printVec(players);
     std::cout << "[losers]" << std::endl;
@@ -171,6 +202,12 @@ void PmergeMe::sort(std::vector<std::pair<int, int> > &players)
 
     std::vector<size_t> insertSequence = generateInsertOrder(tails.size());
     insertTails(insertSequence, players, tails);
+
+    std::cout << "=============== Insert Tails After ===============" << std::endl;
+    std::cout << "[winners]" << std::endl;
+    PmergeMe::printVec(players);
+    // std::cout << "[losers]" << std::endl;
+    // PmergeMe::printVec(tails);
 }
 
 //deque
