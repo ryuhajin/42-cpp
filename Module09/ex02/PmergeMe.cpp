@@ -92,6 +92,28 @@ bool comparePairToSecond(const std::pair<int, int>& lhs, int rhs)
     return lhs.second < rhs;
 }
 
+struct ComparePair {
+    bool operator()(const std::pair<int, int>& a, const std::pair<int, int>& b) {
+        return a.second < b.second;
+    }
+};
+
+void clearLoseByDefault (std::vector<std::pair<int, int> > &losers)
+{
+    std::vector<std::pair<int, int> > back;
+
+    while (losers[0].second == -1)
+    {
+        back.push_back(losers[0]);
+        losers.erase(losers.begin());
+    }
+    
+    for (size_t i = 0; i < back.size(); i++)
+    {
+        losers.push_back(back[i]);
+    }
+}
+
 void playersIdxRenumber (std::vector<std::pair<int, int> > &winners, std::vector<std::pair<int, int> > &losers)
 {
     std::cout << "*************** IdxRenumber start! ********************" << std::endl;
@@ -108,14 +130,8 @@ void playersIdxRenumber (std::vector<std::pair<int, int> > &winners, std::vector
             losers[i].second = std::distance(winners.begin(), it);
     }
 
-    std::vector<std::pair<int, int> > renumberTails;
-    for (size_t i = 0; i < losers.size(); i++)
-    {
-        it = std::lower_bound(losers.begin(), losers.end(), i, comparePairToSecond);
-        renumberTails.push_back(losers + it);
-    }
-    
-    losers = renumberTails;
+    std::sort(losers.begin(), losers.end(), ComparePair());
+    clearLoseByDefault(losers);
 
     std::cout << " After losers Idx " << std::endl;
     PmergeMe::printVec(losers);
@@ -165,8 +181,8 @@ void insertTails(std::vector<size_t> &insert, std::vector<std::pair<int, int> > 
     
     for (size_t i = 0; i < losers.size(); i++)
     {
-        winners.insert(it, losers[insert[i]]);
         it = std::lower_bound(winners.begin(), winners.begin() + i + 1, losers[insert[i]]);
+        winners.insert(it, losers[insert[i]]);
     }
 }
 
