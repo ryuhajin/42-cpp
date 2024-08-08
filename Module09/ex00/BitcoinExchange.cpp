@@ -133,7 +133,7 @@ void BitcoinExchange::printExchange(const std::string& date, double& value)
 
 bool BitcoinExchange::initData(std::string fileName)
 {
-	std::ifstream file(fileName);
+	std::ifstream file(fileName.c_str());
 
 	if (!file.is_open())
 	{
@@ -175,7 +175,7 @@ bool BitcoinExchange::initData(std::string fileName)
 
 bool BitcoinExchange::inputExchange(std::string fileName)
 {
-	std::ifstream file(fileName);
+	std::ifstream file(fileName.c_str());
 	if (!file.is_open())
 	{
 		std::cerr << "Error: input file open failed." << std::endl;
