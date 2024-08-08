@@ -42,18 +42,14 @@ bool BitcoinExchange::findDelimiter(const std::string& line, const std::string& 
 	return (true);
 }
 
-bool BitcoinExchange::streamStatusCheck(std::istringstream& ss, double& value)
+bool BitcoinExchange::streamStatusCheck(std::string &str, double &value)
 {
+	std::istringstream ss(str);
 	ss >> value;
 
 	if (ss.fail() || !(ss.eof()))
 	{
-		std::cerr << "Error : Value is not in the correct format. => " << value;
-		
-		std::string line;
-		while (std::getline(ss, line, '\n'))
-			std::cerr << line;
-		std::cerr << std::endl;
+		std::cerr << "Error: Value is not in the correct format. => " << str << std::endl;
 		return (false);
 	}
 	return (true);
@@ -87,7 +83,7 @@ bool BitcoinExchange::vaildDate(const std::string& date)
 
 	if (!dateParser(date, tm))
 	{
-		std::cerr << "Error : Date is not in the correct format. => " << date << std::endl;
+		std::cerr << "Error: Date is not in the correct format. => " << date << std::endl;
 		return (false);
 	}
 
@@ -127,7 +123,7 @@ void BitcoinExchange::printExchange(const std::string& date, double& value)
 	std::map<std::string, double>::iterator it = this->_data.lower_bound(date);
 
 	if (it == _data.end())
-		std::cout << "Error : No dates near you were found." << std::endl;
+		std::cout << "Error: No dates near you were found." << std::endl;
 	else
 	{
 		// std::cout << "value : " << it->second << " amount : " << value << std::endl;
@@ -141,7 +137,7 @@ bool BitcoinExchange::initData(std::string fileName)
 
 	if (!file.is_open())
 	{
-		std::cerr << "Error : data file open failed." << std::endl;
+		std::cerr << "Error: data file open failed." << std::endl;
 		return (false);
 	}
 
@@ -149,7 +145,7 @@ bool BitcoinExchange::initData(std::string fileName)
 	std::getline(file, head);
 	if (!("date,exchange_rate" == head))
 	{
-		std::cerr << "Error : data Not a valid head format." << std::endl;
+		std::cerr << "Error: data Not a valid head format." << std::endl;
 		return (false);
 	}
 
@@ -160,13 +156,17 @@ bool BitcoinExchange::initData(std::string fileName)
 			continue;
 		if (!findDelimiter(line, ",", 10))
 			return  (false);
+
 		std::istringstream ss(line);
         std::string date;
 		std::getline(ss, date, ',');
 		if (!vaildDate(date))
 			return (false);
+
+		std::string str;
+		std::getline(ss, str);
 		double value;
-		if (!streamStatusCheck(ss, value))
+		if (!streamStatusCheck(str, value))
 			return (false);
 		_data[date] = value;
     }
@@ -178,7 +178,7 @@ bool BitcoinExchange::inputExchange(std::string fileName)
 	std::ifstream file(fileName);
 	if (!file.is_open())
 	{
-		std::cerr << "Error : input file open failed." << std::endl;
+		std::cerr << "Error: input file open failed." << std::endl;
 		return (false);
 	}
 
@@ -186,7 +186,7 @@ bool BitcoinExchange::inputExchange(std::string fileName)
 	std::getline(file, head);
 	if (!("date | value" == head))
 	{
-		std::cerr << "Error : input Not a valid head format." << std::endl;
+		std::cerr << "Error: input Not a valid head format." << std::endl;
 		return (false);
 	}
 
@@ -197,13 +197,17 @@ bool BitcoinExchange::inputExchange(std::string fileName)
 			continue;
 		if (!findDelimiter(line, " | ", 10))
 			continue;
+
 		std::istringstream ss(line);
         std::string date;
 		std::getline(ss, date, '|');
 		if (!vaildDate(date))
 			continue;
+
+		std::string str;
+		std::getline(ss, str);
 		double value;
-		if (!streamStatusCheck(ss, value))
+		if (!streamStatusCheck(str, value))
 			continue;
 		if (!vaildValue(value))
 			continue;

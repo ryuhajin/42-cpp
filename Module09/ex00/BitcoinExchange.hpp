@@ -16,7 +16,7 @@ public:
 	~BitcoinExchange();
 
 	bool findDelimiter(const std::string& line, const std::string& delimiter, size_t idx);
-	bool streamStatusCheck(std::istringstream& ss, double& value);
+	bool streamStatusCheck(std::string &str, double &value);
 	bool dateParser(const std::string &date, std::tm &tm);
 	bool vaildDate(const std::string& date);
 	bool vaildValue(double& value);
