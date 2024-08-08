@@ -59,15 +59,33 @@ bool BitcoinExchange::streamStatusCheck(std::istringstream& ss, double& value)
 	return (true);
 }
 
+bool BitcoinExchange::dateParser(const std::string &date, std::tm &tm)
+{
+	std::istringstream ss(date);
+
+	int year, month, day;
+	char first_del, second_del;
+
+	ss >> year >> first_del >> month >> second_del >> day;
+
+	if (ss.fail() || first_del != '-' || second_del != '-')
+        return (false);
+	else if (year < 0 || month < 1 || month > 12 || day < 1 || day > 31)
+        return (false);
+
+	tm.tm_year = year - 1900;
+    tm.tm_mon = month - 1;
+    tm.tm_mday = day;
+
+	return (true);
+}
+
+
 bool BitcoinExchange::vaildDate(const std::string& date)
 {
 	std::tm tm = {};
 
-	// std::cout << date << '\n' << std::endl;
-	std::istringstream ss(date);
-	ss >> std::get_time(&tm, "%Y-%m-%d");
-	// std::cout << "tm year: " << tm.tm_year + 1900 << ", Month: " << tm.tm_mon << ", Day: " << tm.tm_mday << '\n' << std::endl;
-	if (ss.fail() || tm.tm_year + 1900 < 0 || tm.tm_mon < 0 || tm.tm_mon  > 11 || tm.tm_mday < 1 || tm.tm_mday > 31)
+	if (!dateParser(date, tm))
 	{
 		std::cerr << "Error : Date is not in the correct format. => " << date << std::endl;
 		return (false);
