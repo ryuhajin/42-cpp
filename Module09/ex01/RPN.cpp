@@ -1,6 +1,6 @@
 #include "RPN.hpp"
 #include <iostream>
-
+#include <cstdlib>
 
 RPN::RPN()
 {}
@@ -76,7 +76,7 @@ int RPN::calculator (int first, int second, char mathOperator)
 		if (second == 0)
 		{
 			std::cerr << "Error" << std::endl;
-			std::exit(1);
+			exit(1);
 		}
 		result = first / second;
 		break;
@@ -95,7 +95,7 @@ int RPN::getResult (void)
 	if (_stack.size() != 1)
 	{
 		std::cerr << "Error" << std::endl;
-		std::exit(1);
+		exit(1);
 	}
 	
 	return (_stack.top());
