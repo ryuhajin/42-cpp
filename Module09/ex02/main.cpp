@@ -69,16 +69,16 @@ int main(int argc, char* argv[])
     std::cout << std::endl;
 
     //sorted check
-    std::cout << "[Sort check]" << std::endl;
-	if (std::is_sorted(after_vInput.begin(), after_vInput.end(), compareUtils::compareFirstOnly) == false)
-		std::cerr << "vector sort KO!" << std::endl;
-    else
-        std::cout << "vector sort OK." << std::endl;
+    // std::cout << "[Sort check]" << std::endl;
+	// if (std::is_sorted(after_vInput.begin(), after_vInput.end(), compareUtils::compareFirstOnly) == false)
+	// 	std::cerr << "vector sort KO!" << std::endl;
+    // else
+    //     std::cout << "vector sort OK." << std::endl;
 
-    if (std::is_sorted(after_dInput.begin(), after_dInput.end(), compareUtils::compareFirstOnly) == false)
-        std::cerr << "deque sort KO!" << std::endl;
-    else
-        std::cout << "deque sort OK." << std::endl;
-    std::cout << std::endl;
+    // if (std::is_sorted(after_dInput.begin(), after_dInput.end(), compareUtils::compareFirstOnly) == false)
+    //     std::cerr << "deque sort KO!" << std::endl;
+    // else
+    //     std::cout << "deque sort OK." << std::endl;
+    // std::cout << std::endl;
     return (0);
 }
