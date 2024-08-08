@@ -3,27 +3,23 @@
 #include <vector>
 #include <deque>
 
-bool compareFirstOnly(const std::pair<int, int>& a, const std::pair<int, int>& b) {
-    return a.first < b.first;
-}
-
 int main(int argc, char* argv[])
 {
     if (argc == 1)
     {
-        std::cerr << "Error : Not enough input" << std::endl;
+        std::cerr << "Error : not enough input" << std::endl;
         return (1);
     }
 
-    std::vector<std::pair<int, int> > vInput;
-    if (!PmergeMe::argvToVec(argc, argv, vInput))
+    std::vector<int> input;
+    if (!VectorSort::argvToVec(argc, argv, input))
         return (1);
-    std::cout << "=============== input vector ===============" << std::endl;
-    PmergeMe::printVec(vInput);
+    std::vector<std::pair<int, int> > afterInput;
+    VectorSort::makePairVec(input, afterInput);
+    VectorSort::printPairVec(afterInput);
+    VectorSort::mergeInsertSort(afterInput);
 
-    PmergeMe::sort(vInput);
-
-	if (std::is_sorted(vInput.begin(), vInput.end(), compareFirstOnly) == false)
+	if (std::is_sorted(afterInput.begin(), afterInput.end(), compareUtils::compareFirstOnly) == false)
 		std::cerr << "KO!" << std::endl;
     return (0);
 }
