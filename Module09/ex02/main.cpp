@@ -2,7 +2,18 @@
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <sys/time.h>
+#include <iomanip>
 #include <ctime>
+
+double usCalculator (timeval &start, timeval &end)
+{
+	long seconds = end.tv_sec - start.tv_sec;
+    long microseconds = end.tv_usec - start.tv_usec;
+    double runtime = seconds + microseconds * 1e-6; // 1 second = 1,000,000 microsecond
+
+	return (runtime);
+}
 
 int main(int argc, char* argv[])
 {
@@ -12,6 +23,8 @@ int main(int argc, char* argv[])
         return (1);
     }
 
+	struct timeval vectorStart, vectorEnd, dequeStart,dequeEnd;
+
     //STL vector type
     std::vector<int> vInput;
     if (!VectorSort::argvToVec(argc, argv, vInput))
@@ -20,9 +33,9 @@ int main(int argc, char* argv[])
     VectorSort::makePairVec(vInput, after_vInput);
 
     //STL vecotr type time recode
-    std::clock_t vecStart = std::clock();
+    gettimeofday(&vectorStart, NULL);
     VectorSort::mergeInsertSort(after_vInput);
-    std::clock_t vecEnd = std::clock();
+	gettimeofday(&vectorEnd, NULL);
 
     //STL deque type
     std::deque<int> dInput;
@@ -32,9 +45,9 @@ int main(int argc, char* argv[])
     DequeSort::makePairDeque(dInput, after_dInput);
 
     //STL deque type time recode
-    std::clock_t dequeStart = std::clock();
+    gettimeofday(&dequeStart, NULL);
     DequeSort::mergeInsertSort(after_dInput);
-    std::clock_t dequeEnd = std::clock();
+    gettimeofday(&dequeEnd, NULL);
 
     //before after Vector Print
     std::cout << std::endl;
@@ -64,8 +77,8 @@ int main(int argc, char* argv[])
     std::cout << std::endl;
 
     //recode print
-    std::cout << "Time to process a range of " << vInput.size() << " elements with Vector : " << vecEnd - vecStart << " us" << std::endl;
-	std::cout << "Time to process a range of " << dInput.size() << " elements with Deque : " << dequeEnd - dequeStart << " us" << std::endl;
+    std::cout << "Time to process a range of " << vInput.size() << " elements with Vector : " << std::fixed << usCalculator(vectorStart, vectorEnd) << " us" << std::endl;
+	std::cout << "Time to process a range of " << dInput.size() << " elements with Deque : " << std::fixed << usCalculator(dequeStart, dequeEnd) << " us" << std::endl;
     std::cout << std::endl;
 
     //sorted check
