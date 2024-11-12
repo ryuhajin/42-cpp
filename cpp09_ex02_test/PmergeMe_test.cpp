@@ -88,6 +88,7 @@ void VectorSort::playersCompare (std::vector<std::pair<int, int> > &winners, std
 {
     for (size_t i = 0; i < winners.size(); i++)
     {
+		std::cout << "swap = " << i << std::endl;
         if (winners[i].first < losers[i].first)
             std::swap(winners[i], losers[i]);
     }
@@ -177,6 +178,7 @@ void VectorSort::insertTails(std::vector<size_t> &insert, std::vector<std::pair<
     {
         it = std::lower_bound(winners.begin(), winners.begin() + insert[i] + i, losers[insert[i]]);
 		std::cout << "i = " << i << "\n";
+		std::cout << "범위 = " << insert[i] + i << std::endl;
 		std::cout << "insert loser = " << losers[insert[i]].first << "\n";
 		std::cout << "lower_bound it = " << (int)(*it).first << '\n' << std::endl;
         winners.insert(it, losers[insert[i]]);

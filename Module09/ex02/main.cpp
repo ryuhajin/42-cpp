@@ -90,6 +90,7 @@ int main(int argc, char* argv[])
 
     // if (std::is_sorted(after_dInput.begin(), after_dInput.end(), compareUtils::compareFirstOnly) == false)
     //     std::cerr << "deque sort KO!" << std::endl;
+	
     // else
     //     std::cout << "deque sort OK." << std::endl;
     // std::cout << std::endl;
