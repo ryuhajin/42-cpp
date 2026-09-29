@@ -2,6 +2,7 @@
 *.o
 *.a
 *.gch
+*.d
 a.out
 *.dSYM/
 
@@ -10,3 +11,5 @@ a.out
 .idea/
 *.swp
 .DS_Store
+Module08/ex02/ex02
+cpp09_ex02_test/PmergeMeT
